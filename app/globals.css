@@ -1,11 +1,12 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 :root {
   color-scheme: light;
 }
 
 body {
-  @apply bg-ivory text-graphite antialiased;
+  background-color: #f8f6f2;
+  color: #2f343f;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

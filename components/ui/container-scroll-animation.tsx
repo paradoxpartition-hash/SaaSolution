@@ -37,12 +37,12 @@ export function ContainerScroll({ titleComponent, children }: ContainerScrollPro
         <motion.div
           style={{ rotateX: rotate, scale }}
           className={cn(
-            "relative mx-auto mt-10 h-[30rem] w-full max-w-6xl rounded-[2rem] border border-soft-gray/70 bg-white p-4 shadow-premium md:h-[42rem] md:p-8",
+            "relative mx-auto mt-10 h-[30rem] w-full max-w-6xl rounded-[2rem] border border-[#d8dbe2]/70 bg-white p-4 shadow-[0_20px_60px_rgba(47,52,63,0.12)] md:h-[42rem] md:p-8",
             "[transform-style:preserve-3d]"
           )}
         >
           <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-b from-white to-[#f3f4f7]" />
-          <div className="relative z-10 h-full overflow-hidden rounded-[1.3rem] border border-soft-gray/70 bg-[#fcfcfd]">
+          <div className="relative z-10 h-full overflow-hidden rounded-[1.3rem] border border-[#d8dbe2]/70 bg-[#fcfcfd]">
             {children}
           </div>
           {!isMobile && (
