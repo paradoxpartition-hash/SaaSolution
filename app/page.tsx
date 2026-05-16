@@ -1,13 +1,19 @@
-import { Bot, Cable, Cloud, Code2, Globe2, Layers3, Server, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 
-const products = ["Mithaq", "PriorityPlanR", "Viyra", "First Line AI", "Smart NFC Guest Pass", "Delicious Fitness"];
-const tech = ["Next.js", "TypeScript", "Python", "Node.js", "PostgreSQL", "AWS", "OpenAI APIs", "Docker"];
+const projects = [
+  { name: "Mithaq", tone: "from-[#f5f7fb] to-[#ebeff8]", tag: "Legal AI" },
+  { name: "PriorityPlanR", tone: "from-[#fff7ed] to-[#fdeed8]", tag: "Smart Planning" },
+  { name: "Viyra", tone: "from-[#eef7f4] to-[#dff0ea]", tag: "Luxury Real Estate" },
+  { name: "First Line AI", tone: "from-[#f4f0ff] to-[#e8e0ff]", tag: "Support Automation" },
+  { name: "Smart NFC Guest Pass", tone: "from-[#edf7ff] to-[#d9eeff]", tag: "Hospitality Access" },
+  { name: "Delicious Fitness", tone: "from-[#fff3f3] to-[#ffe3e3]", tag: "Food & Wellness" }
+];
 
 export default function Home() {
   return (
     <main className="bg-[#f8f6f2] text-[#2f343f]">
-      <section className="flex flex-col overflow-hidden">
+      <section className="flex flex-col">
         <ContainerScroll
           titleComponent={
             <div>
@@ -23,26 +29,43 @@ export default function Home() {
             </div>
           }
         >
-          <div className="grid h-full grid-cols-12 gap-3 bg-gradient-to-b from-white to-[#f3f4f7] p-4">
-            <div className="col-span-12 md:col-span-7 rounded-2xl border border-[#d8dbe2] bg-white p-4">
-              <h3 className="mb-3 flex items-center gap-2 font-semibold"><Layers3 className="h-4 w-4 text-[#b89c6a]"/> Product Cards</h3>
-              <div className="grid grid-cols-2 gap-2 text-xs md:text-sm">{products.map((p)=><div key={p} className="rounded-lg border border-[#d8dbe2] bg-[#fbfbfc] p-2">{p}</div>)}</div>
-            </div>
-            <div className="col-span-12 md:col-span-5 rounded-2xl border border-[#d8dbe2] bg-white p-4">
-              <h3 className="mb-3 flex items-center gap-2 font-semibold"><Bot className="h-4 w-4 text-[#b89c6a]"/> AI Workflow Blocks</h3>
-              <div className="space-y-2 text-xs md:text-sm">
-                <div className="rounded-lg border border-[#d8dbe2] bg-[#fbfbfc] p-2">Lead Intake → Qualification Agent → CRM Routing</div>
-                <div className="rounded-lg border border-[#d8dbe2] bg-[#fbfbfc] p-2">Support Ticket → AI Triage → Human Escalation</div>
-                <div className="rounded-lg border border-[#d8dbe2] bg-[#fbfbfc] p-2">Data Sync → Insight Engine → Executive Dashboard</div>
+          <div className="relative h-full bg-gradient-to-b from-[#ffffff] to-[#f2f4f8] p-4 md:p-6">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(184,156,106,0.12),transparent_42%)]" />
+            <div className="relative h-full rounded-2xl border border-[#d8dbe2]/80 bg-white/90 p-4 backdrop-blur-sm">
+              <div className="mb-3 flex items-center justify-between">
+                <h3 className="text-sm font-semibold text-[#2f343f] md:text-base">SaaSolution SL Project Showcase</h3>
+                <span className="rounded-full border border-[#b89c6a]/30 bg-[#fffaf0] px-3 py-1 text-xs text-[#7b6438]">Live Product Ecosystem</span>
               </div>
-            </div>
-            <div className="col-span-12 md:col-span-8 rounded-2xl border border-[#d8dbe2] bg-white p-4">
-              <h3 className="mb-3 flex items-center gap-2 font-semibold"><Code2 className="h-4 w-4 text-[#b89c6a]"/> Technology Stack Badges</h3>
-              <div className="flex flex-wrap gap-2">{tech.map((t)=><span key={t} className="rounded-full border border-[#d8dbe2] px-3 py-1 text-xs bg-[#fbfbfc]">{t}</span>)}</div>
-            </div>
-            <div className="col-span-12 md:col-span-4 rounded-2xl border border-[#d8dbe2] bg-white p-4">
-              <h3 className="mb-3 flex items-center gap-2 font-semibold"><Globe2 className="h-4 w-4 text-[#b89c6a]"/> Global Infrastructure</h3>
-              <ul className="space-y-2 text-xs md:text-sm"><li className="flex gap-2 items-center"><Cloud className="h-4 w-4"/>Multi-region cloud deployment</li><li className="flex gap-2 items-center"><Server className="h-4 w-4"/>Scalable microservices</li><li className="flex gap-2 items-center"><Cable className="h-4 w-4"/>Secure API integrations</li></ul>
+
+              <div className="relative h-[58%] rounded-xl border border-[#d8dbe2] bg-gradient-to-br from-[#f6f8fc] to-[#eef2f8] p-4 shadow-sm">
+                <div className="mb-2 text-xs font-medium uppercase tracking-[0.2em] text-[#7e8595]">Featured Platform</div>
+                <div className="mb-2 text-xl font-semibold">Viyra</div>
+                <div className="grid grid-cols-3 gap-2 text-xs">
+                  <div className="rounded-lg bg-white p-2 shadow-sm">Property Intake AI</div>
+                  <div className="rounded-lg bg-white p-2 shadow-sm">Automation Workflows</div>
+                  <div className="rounded-lg bg-white p-2 shadow-sm">Owner Dashboard</div>
+                </div>
+                <div className="mt-3 grid grid-cols-2 gap-2">
+                  <div className="h-16 rounded-lg bg-white/90 p-2 text-[11px]">Listing Ops Timeline</div>
+                  <div className="h-16 rounded-lg bg-white/90 p-2 text-[11px]">International Market Signals</div>
+                </div>
+              </div>
+
+              <div className="relative mt-4 h-[34%] overflow-hidden">
+                <div className="project-marquee absolute left-0 top-1/2 flex -translate-y-1/2 gap-3">
+                  {[...projects, ...projects].map((project, idx) => (
+                    <div
+                      key={`${project.name}-${idx}`}
+                      className={`w-[180px] shrink-0 rounded-xl border border-[#d8dbe2] bg-gradient-to-br ${project.tone} p-3 shadow-sm`}
+                      style={{ transform: `rotate(${idx % 2 === 0 ? -2 : 2}deg)` }}
+                    >
+                      <div className="mb-5 h-10 rounded-md bg-white/85" />
+                      <div className="text-xs font-semibold">{project.name}</div>
+                      <div className="text-[11px] text-[#5b6478]">{project.tag}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </ContainerScroll>

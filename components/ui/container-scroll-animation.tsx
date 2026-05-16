@@ -26,16 +26,16 @@ export const ContainerScroll = ({
     offset: ["start start", "end start"]
   });
 
-  const rotate = useTransform(scrollYProgress, [0, 1], [20, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1.05, 1]);
-  const translate = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const rotate = useTransform(scrollYProgress, [0, 1], [isMobile ? 14 : 20, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [isMobile ? 0.95 : 1.05, 1]);
+  const translate = useTransform(scrollYProgress, [0, 1], [0, -120]);
 
   return (
     <div
-      className="h-[60rem] md:h-[80rem] flex items-center justify-center relative p-2 md:p-20"
+      className="h-[60rem] md:h-[80rem] flex items-center justify-center relative p-2 md:p-20 [perspective:1000px]"
       ref={containerRef}
     >
-      <div className="py-10 md:py-40 w-full relative" style={{ perspective: "1000px" }}>
+      <div className="py-10 md:py-40 w-full relative">
         <Header translate={translate} titleComponent={titleComponent} />
         <Card rotate={rotate} translate={translate} scale={scale} isMobile={isMobile}>
           {children}
@@ -77,7 +77,9 @@ export const Card = ({
         rotateX: rotate,
         scale,
         boxShadow:
-          "rgba(0, 0, 0, 0.08) 0px 30px 90px 0px, rgba(0, 0, 0, 0.08) 0px 8px 20px 0px"
+          "rgba(0, 0, 0, 0.08) 0px 30px 90px 0px, rgba(0, 0, 0, 0.08) 0px 8px 20px 0px",
+        transformStyle: "preserve-3d",
+        willChange: "transform"
       }}
       className="max-w-5xl -mt-12 h-[30rem] md:h-[40rem] w-full border-4 border-[#6C6C6C] p-2 md:p-6 bg-[#222222] rounded-[30px] shadow-2xl"
     >
