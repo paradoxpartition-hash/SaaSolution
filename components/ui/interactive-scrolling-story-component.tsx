@@ -6,7 +6,7 @@ type Slide = { title: string; description: string; image: string; fallback: stri
 const slides: Slide[] = [
   { title: "About SaaSolutions", description: "We are SaaSolutions — a studio of engineers and designers shipping cinematic products for ambitious companies. From commerce to AI agents to connected hardware, we build the things your customers can't stop talking about.", image: "/projects/mithaq.png", fallback: "https://images.unsplash.com/photo-1564865878688-9a244444042a?q=80&w=2070&auto=format&fit=crop" },
   { title: "AI-First Platforms", description: "We create software that combines automation, modern cloud architecture and AI-driven workflows.", image: "/projects/first-line-ai.png", fallback: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=2070&auto=format&fit=crop" },
-  { title: "Product Portfolio", description: "Our portfolio includes Mithaq, PriorityPlanR, Viyra, First Line AI, Smart NFC Guest Pass and Delicious Fitness.", image: "/projects/viyra.png", fallback: "https://images.unsplash.com/photo-1608306448197-e83633f1261c?q=80&w=1974&auto=format&fit=crop" },
+  { title: "Six products.\nOne obsession with craft.", description: "Every line of code, every pixel, every interaction — engineered to make your customers feel something. Here's what we're shipping right now.", image: "/projects/viyra.png", fallback: "https://images.unsplash.com/photo-1608306448197-e83633f1261c?q=80&w=1974&auto=format&fit=crop" },
   { title: "Partner With Us", description: "We are open to partnerships, pilots and international deployment opportunities with enterprises, governments, legal firms, real estate partners, hospitality operators and technology partners.", image: "/projects/priorityplanr.png", fallback: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop" }
 ];
 
@@ -38,8 +38,8 @@ export function InteractiveScrollingStory() {
           {slides.map((slide, i) => (
             <article key={slide.title} data-index={i} ref={(el) => { refs.current[i] = el; }} className="min-h-screen flex items-center">
               <div className={`max-w-md transition-all duration-500 ${activeIndex===i?"opacity-100 translate-y-0":"opacity-0 translate-y-10"}`}>
-                <h2 className="text-5xl md:text-6xl font-bold leading-tight tracking-tighter">{slide.title}</h2>
-                <p className="mt-6 text-lg md:text-xl">{slide.description}</p>
+                <h2 className="text-5xl md:text-6xl font-bold leading-tight tracking-tighter whitespace-pre-line">{slide.title}</h2>
+                <p className="mt-6 max-w-md text-lg leading-relaxed md:text-xl">{slide.description}</p>
               </div>
             </article>
           ))}
