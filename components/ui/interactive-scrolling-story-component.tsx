@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { AnimatedProductList } from "@/components/ui/animated-product-list";
+import { ProductHoverSlider } from "@/components/ui/product-hover-slider";
 
 type Slide = { title: string; description: string; image: string; fallback: string };
 const slides: Slide[] = [
@@ -41,7 +41,7 @@ export function InteractiveScrollingStory() {
               <div className={`max-w-md transition-all duration-500 ${activeIndex===i?"opacity-100 translate-y-0":"opacity-0 translate-y-10"}`}>
                 <h2 className="text-5xl md:text-6xl font-bold leading-tight tracking-tighter whitespace-pre-line">{slide.title}</h2>
                 <p className="mt-6 max-w-md text-lg leading-relaxed md:text-xl">{slide.description}</p>
-                {i === 2 && <AnimatedProductList />}
+                {i === 2 && <ProductHoverSlider slides={[{ title: "Mithaq", image: "/projects/mithaq.png" }, { title: "PriorityPlanR", image: "/projects/priorityplanr.png" }, { title: "Viyra", image: "/projects/viyra.png" }, { title: "First Line AI", image: "/projects/first-line-ai.png" }, { title: "Smart NFC Guest Pass", image: "/projects/smart-nfc.png" }, { title: "Delicious Fitness", image: "/projects/delicious-fitness.png" }]} />}
               </div>
             </article>
           ))}
