@@ -45,7 +45,7 @@ export function HoverSlider({ children, className }: { children: React.ReactNode
   );
 }
 
-export function TextStaggerHover({ text, index, className }: { text: string; index: number; className?: string }) {
+export function TextStaggerHover({ text, index, className, onActivateExternal }: { text: string; index: number; className?: string; onActivateExternal?: (index:number)=>void }) {
   const { activeSlide, changeSlide } = useHoverSliderContext();
   const chars = splitText(text);
   const isActive = activeSlide === index;
@@ -53,8 +53,8 @@ export function TextStaggerHover({ text, index, className }: { text: string; ind
   return (
     <button
       type="button"
-      onMouseEnter={() => changeSlide(index)}
-      onFocus={() => changeSlide(index)}
+      onMouseEnter={() => { changeSlide(index); onActivateExternal?.(index); }}
+      onFocus={() => { changeSlide(index); onActivateExternal?.(index); }}
       className={cn("relative block overflow-hidden text-left text-3xl font-semibold leading-tight tracking-tight md:text-5xl", isActive ? "opacity-100" : "opacity-20", className)}
     >
       <span className="sr-only">{text}</span>
@@ -87,20 +87,14 @@ export function HoverSliderImage({ index, src, alt }: { index: number; src: stri
   return <motion.img src={src} alt={alt} className="absolute inset-0 h-full w-full object-cover" initial="hidden" animate={activeSlide === index ? "visible" : "hidden"} variants={clipPathVariants} />;
 }
 
-export function ProductHoverSlider({ products }: { products: ProductSlide[] }) {
+export function ProductHoverSlider({ products, onSlideChange }: { products: ProductSlide[]; onSlideChange: (index: number) => void }) {
   return (
-    <HoverSlider>
+    <HoverSlider className="grid-cols-1">
       <div className="relative z-30 flex flex-col items-start gap-1">
         {products.map((product, index) => (
-          <TextStaggerHover key={product.name} text={product.name} index={index} className="text-black" />
+          <TextStaggerHover key={product.name} text={product.name} index={index} className="text-black" onActivateExternal={onSlideChange} />
         ))}
       </div>
-
-      <HoverSliderImageWrap className="relative z-10">
-        {products.map((product, index) => (
-          <HoverSliderImage key={product.name} index={index} src={product.image} alt={product.name} />
-        ))}
-      </HoverSliderImageWrap>
     </HoverSlider>
   );
 }
