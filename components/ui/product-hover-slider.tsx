@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useMemo, useState } from "react";
-import { MotionConfig, motion } from "framer-motion";
+import { MotionConfig } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 type Product = { name: string; image: string };
@@ -12,19 +12,6 @@ type HoverSliderContextValue = {
 };
 
 const HoverSliderContext = createContext<HoverSliderContextValue | null>(null);
-
-const splitText = (text: string) => text.split("");
-
-const clipPathVariants = {
-  visible: {
-    clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-    transition: { duration: 0.8, ease: [0.33, 1, 0.68, 1] as [number, number, number, number] }
-  },
-  hidden: {
-    clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0px)",
-    transition: { duration: 0.8, ease: [0.33, 1, 0.68, 1] as [number, number, number, number] }
-  }
-};
 
 export function useHoverSliderContext() {
   const context = useContext(HoverSliderContext);
@@ -39,52 +26,10 @@ export function HoverSlider({ children, className }: { children: React.ReactNode
   return (
     <MotionConfig transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}>
       <HoverSliderContext.Provider value={value}>
-        <div className={cn("mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 md:items-start", className)}>{children}</div>
+        <div className={cn("mt-12 w-full max-w-xl", className)}>{children}</div>
       </HoverSliderContext.Provider>
     </MotionConfig>
   );
-}
-
-export function TextStaggerHover({ text, index, className }: { text: string; index: number; className?: string }) {
-  const { activeSlide, changeSlide } = useHoverSliderContext();
-  const isActive = activeSlide === index;
-  const chars = splitText(text);
-
-  return (
-    <button
-      type="button"
-      onMouseEnter={() => changeSlide(index)}
-      onFocus={() => changeSlide(index)}
-      className={cn("relative block overflow-hidden text-left text-3xl font-semibold leading-tight tracking-tight md:text-5xl", isActive ? "opacity-100" : "opacity-20", className)}
-    >
-      <span className="sr-only">{text}</span>
-      <span aria-hidden className="relative block h-[1.2em]">
-        <span className="absolute inset-0">
-          {chars.map((char, charIndex) => (
-            <motion.span key={`top-${index}-${charIndex}`} className="inline-block whitespace-pre" animate={{ y: isActive ? "-110%" : "0%" }} transition={{ delay: charIndex * 0.025, duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}>
-              {char}
-            </motion.span>
-          ))}
-        </span>
-        <span className="absolute inset-0">
-          {chars.map((char, charIndex) => (
-            <motion.span key={`bottom-${index}-${charIndex}`} className="inline-block whitespace-pre" animate={{ y: isActive ? "0%" : "110%" }} transition={{ delay: charIndex * 0.025, duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}>
-              {char}
-            </motion.span>
-          ))}
-        </span>
-      </span>
-    </button>
-  );
-}
-
-export function HoverSliderImageWrap({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <div className={cn("relative h-[260px] overflow-hidden rounded-2xl border border-black/10 md:h-[360px]", className)}>{children}</div>;
-}
-
-export function HoverSliderImage({ index, src, alt }: { index: number; src: string; alt: string }) {
-  const { activeSlide } = useHoverSliderContext();
-  return <motion.img src={src} alt={alt} className="absolute inset-0 h-full w-full object-cover" initial="hidden" animate={activeSlide === index ? "visible" : "hidden"} variants={clipPathVariants} />;
 }
 
 const products: Product[] = [
@@ -97,18 +42,36 @@ const products: Product[] = [
 ];
 
 export function ProductHoverSlider() {
+  const [activeSlide, setActiveSlide] = useState(0);
+
   return (
     <HoverSlider>
-      <div className="relative z-20 flex flex-col items-start gap-1">
-        {products.map((product, index) => (
-          <TextStaggerHover key={product.name} text={product.name} index={index} className="text-black" />
-        ))}
+      <div className="space-y-2" onMouseLeave={() => setActiveSlide(0)}>
+        {products.map((product, index) => {
+          const isActive = activeSlide === index;
+          return (
+            <button
+              key={product.name}
+              type="button"
+              onMouseEnter={() => setActiveSlide(index)}
+              onFocus={() => setActiveSlide(index)}
+              className="group flex w-full items-center gap-3 text-left"
+              aria-label={product.name}
+            >
+              <span
+                className={cn(
+                  "text-[36px] leading-none tracking-tight md:text-[56px] transition-colors duration-300",
+                  isActive ? "text-black" : "text-black/25"
+                )}
+              >
+                {product.name}
+              </span>
+              <span className={cn("h-px flex-1 transition-colors duration-300", isActive ? "bg-black/20" : "bg-black/12")} />
+              <span className={cn("w-8 text-right text-2xl tabular-nums transition-colors duration-300", isActive ? "text-black/70" : "text-black/30")}>{String(index + 1).padStart(2, "0")}</span>
+            </button>
+          );
+        })}
       </div>
-      <HoverSliderImageWrap className="relative z-10">
-        {products.map((product, index) => (
-          <HoverSliderImage key={product.name} index={index} src={product.image} alt={product.name} />
-        ))}
-      </HoverSliderImageWrap>
     </HoverSlider>
   );
 }
