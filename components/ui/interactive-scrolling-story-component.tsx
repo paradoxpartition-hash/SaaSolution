@@ -52,7 +52,7 @@ export function InteractiveScrollingStory() {
 
         <div className="hidden md:flex sticky top-0 h-screen border-r border-black/10 justify-center items-center overflow-hidden relative">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.05)_1px,transparent_1px)] bg-[size:40px_40px]" />
-          <div className="relative w-[50%] h-[80vh] overflow-hidden">
+          <div className="relative h-[80vh] w-[500px] max-w-[calc(100%-3rem)] overflow-hidden">
             <div className="transition-transform duration-700 ease-in-out h-full" style={{ transform: `translateY(-${activeIndex * 100}%)` }}>
               {slides.map((slide, i) => (
                 <div key={slide.title} className="h-[80vh] w-full rounded-2xl border-4 border-black/5 shadow-2xl overflow-hidden bg-white">
