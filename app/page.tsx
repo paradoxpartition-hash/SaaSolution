@@ -17,8 +17,8 @@ export default function Home() {
         <ContainerScroll
           titleComponent={
             <div>
-                            <h1 className="text-4xl md:text-[6rem] font-bold text-black">Software that moves the needle.</h1>
-              <p className="mx-auto mt-4 max-w-3xl text-base md:text-xl text-black/70">SaaSolution SL is a Paradox FZCO company developing AI-first platforms, automation systems and scalable digital products for international markets.</p>
+                            <h1 className="text-4xl md:text-[6rem] font-bold text-black">SaaSolution SL</h1>
+              <p className="mx-auto mt-4 max-w-3xl text-base md:text-xl text-black/70">Software that moves the needle.</p>
             </div>
           }
         >
