@@ -15,8 +15,7 @@ export function InteractiveScrollingStory() {
   const [activeIndex, setActiveIndex] = useState(0);
   const refs = useRef<Array<HTMLElement | null>>([]);
   const [failed, setFailed] = useState<Record<number, boolean>>({});
-  const [portfolioActive, setPortfolioActive] = useState(0);
-  const portfolioSlides = [{ title: "Mithaq", image: "/projects/mithaq.png", fallback: "https://images.unsplash.com/photo-1564865878688-9a244444042a?q=80&w=2070&auto=format&fit=crop" }, { title: "PriorityPlanR", image: "/projects/priorityplanr.png", fallback: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=2070&auto=format&fit=crop" }, { title: "Viyra", image: "/projects/viyra.png", fallback: "https://images.unsplash.com/photo-1608306448197-e83633f1261c?q=80&w=1974&auto=format&fit=crop" }, { title: "First Line AI", image: "/projects/first-line-ai.png", fallback: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop" }, { title: "Smart NFC Guest Pass", image: "/projects/smart-nfc.png", fallback: "https://images.unsplash.com/photo-1564865878688-9a244444042a?q=80&w=2070&auto=format&fit=crop" }, { title: "Delicious Fitness", image: "/projects/delicious-fitness.png", fallback: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=2070&auto=format&fit=crop" }];
+  const portfolioProducts = [{ name: "Mithaq", image: "/projects/mithaq.png" }, { name: "PriorityPlanR", image: "/projects/priorityplanr.png" }, { name: "Viyra", image: "/projects/viyra.png" }, { name: "First Line AI", image: "/projects/first-line-ai.png" }, { name: "Smart NFC Guest Pass", image: "/projects/smart-nfc.png" }, { name: "Delicious Fitness", image: "/projects/delicious-fitness.png" }];
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -43,7 +42,7 @@ export function InteractiveScrollingStory() {
               <div className={`max-w-md transition-all duration-500 ${activeIndex===i?"opacity-100 translate-y-0":"opacity-0 translate-y-10"}`}>
                 <h2 className="text-5xl md:text-6xl font-bold leading-tight tracking-tighter whitespace-pre-line">{slide.title}</h2>
                 <p className="mt-6 max-w-md text-lg leading-relaxed md:text-xl">{slide.description}</p>
-                {i === 2 && <ProductHoverSlider slides={portfolioSlides} activeSlide={portfolioActive} setActiveSlide={setPortfolioActive} />}
+                {i === 2 && <ProductHoverSlider products={portfolioProducts} />}
               </div>
             </article>
           ))}
@@ -57,7 +56,7 @@ export function InteractiveScrollingStory() {
             <div className="transition-transform duration-700 ease-in-out h-full" style={{ transform: `translateY(-${activeIndex * 100}%)` }}>
               {slides.map((slide, i) => (
                 <div key={slide.title} className="h-[80vh] w-full rounded-2xl border-4 border-black/5 shadow-2xl overflow-hidden bg-white">
-                  <img src={(i===2 && activeIndex===2) ? (failed[200+portfolioActive] ? portfolioSlides[portfolioActive].fallback : portfolioSlides[portfolioActive].image) : (failed[i] ? slide.fallback : slide.image)} alt={(i===2 && activeIndex===2) ? portfolioSlides[portfolioActive].title : slide.title} className="h-full w-full object-cover" onError={() => setFailed((p) => ({ ...p, [i===2 && activeIndex===2 ? 200+portfolioActive : i]: true }))} />
+                  <img src={failed[i] ? slide.fallback : slide.image} alt={slide.title} className="h-full w-full object-cover" onError={() => setFailed((p) => ({ ...p, [i]: true }))} />
                 </div>
               ))}
             </div>

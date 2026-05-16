@@ -1,32 +1,61 @@
 "use client";
 
+import { createContext, useContext, useMemo, useState } from "react";
 import { MotionConfig, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-type ProductSlide = { title: string; image: string; fallback?: string };
+type ProductSlide = { name: string; image: string };
+
+type HoverSliderContextType = {
+  activeSlide: number;
+  changeSlide: (index: number) => void;
+};
+
+const HoverSliderContext = createContext<HoverSliderContextType | null>(null);
 
 const splitText = (text: string) => text.split("");
 
-export function ProductHoverSlider({ slides, activeSlide, setActiveSlide }: { slides: ProductSlide[]; activeSlide: number; setActiveSlide: (idx: number) => void }) {
+const clipPathVariants = {
+  visible: {
+    clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+    transition: { duration: 0.8, ease: [0.33, 1, 0.68, 1] as [number, number, number, number] }
+  },
+  hidden: {
+    clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0px)",
+    transition: { duration: 0.8, ease: [0.33, 1, 0.68, 1] as [number, number, number, number] }
+  }
+};
+
+export function useHoverSliderContext() {
+  const context = useContext(HoverSliderContext);
+  if (!context) throw new Error("useHoverSliderContext must be used inside HoverSlider");
+  return context;
+}
+
+export function HoverSlider({ children, className }: { children: React.ReactNode; className?: string }) {
+  const [activeSlide, setActiveSlide] = useState(0);
+  const value = useMemo(() => ({ activeSlide, changeSlide: setActiveSlide }), [activeSlide]);
+
   return (
     <MotionConfig transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}>
-      <div className="mt-8 flex flex-col items-start gap-1">
-        {slides.map((slide, idx) => (
-          <TextStaggerHover key={slide.title} index={idx} text={slide.title} isActive={activeSlide === idx} onActivate={() => setActiveSlide(idx)} />
-        ))}
-      </div>
+      <HoverSliderContext.Provider value={value}>
+        <div className={cn("relative z-20 mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 md:items-start", className)}>{children}</div>
+      </HoverSliderContext.Provider>
     </MotionConfig>
   );
 }
 
-function TextStaggerHover({ text, index, isActive, onActivate }: { text: string; index: number; isActive: boolean; onActivate: () => void }) {
+export function TextStaggerHover({ text, index, className }: { text: string; index: number; className?: string }) {
+  const { activeSlide, changeSlide } = useHoverSliderContext();
   const chars = splitText(text);
+  const isActive = activeSlide === index;
+
   return (
     <button
       type="button"
-      onMouseEnter={onActivate}
-      onFocus={onActivate}
-      className={cn("group relative overflow-hidden text-left text-3xl font-semibold leading-tight tracking-tight md:text-5xl", isActive ? "opacity-100" : "opacity-20")}
+      onMouseEnter={() => changeSlide(index)}
+      onFocus={() => changeSlide(index)}
+      className={cn("relative block overflow-hidden text-left text-3xl font-semibold leading-tight tracking-tight md:text-5xl", isActive ? "opacity-100" : "opacity-20", className)}
     >
       <span className="sr-only">{text}</span>
       <span aria-hidden className="relative block h-[1.2em]">
@@ -46,5 +75,32 @@ function TextStaggerHover({ text, index, isActive, onActivate }: { text: string;
         </span>
       </span>
     </button>
+  );
+}
+
+export function HoverSliderImageWrap({ children, className }: { children: React.ReactNode; className?: string }) {
+  return <div className={cn("relative h-[260px] overflow-hidden rounded-2xl border border-black/10 md:h-[360px]", className)}>{children}</div>;
+}
+
+export function HoverSliderImage({ index, src, alt }: { index: number; src: string; alt: string }) {
+  const { activeSlide } = useHoverSliderContext();
+  return <motion.img src={src} alt={alt} className="absolute inset-0 h-full w-full object-cover" initial="hidden" animate={activeSlide === index ? "visible" : "hidden"} variants={clipPathVariants} />;
+}
+
+export function ProductHoverSlider({ products }: { products: ProductSlide[] }) {
+  return (
+    <HoverSlider>
+      <div className="relative z-30 flex flex-col items-start gap-1">
+        {products.map((product, index) => (
+          <TextStaggerHover key={product.name} text={product.name} index={index} className="text-black" />
+        ))}
+      </div>
+
+      <HoverSliderImageWrap className="relative z-10">
+        {products.map((product, index) => (
+          <HoverSliderImage key={product.name} index={index} src={product.image} alt={product.name} />
+        ))}
+      </HoverSliderImageWrap>
+    </HoverSlider>
   );
 }
