@@ -81,7 +81,7 @@ export const Card = ({
         transformStyle: "preserve-3d",
         willChange: "transform"
       }}
-      className="max-w-5xl -mt-12 h-[30rem] md:h-[40rem] w-full border-4 border-[#6C6C6C] p-2 md:p-6 bg-[#222222] rounded-[30px] shadow-2xl"
+      className="mx-auto max-w-5xl -mt-12 h-[30rem] md:h-[40rem] w-full border-4 border-[#6C6C6C] p-2 md:p-6 bg-[#222222] rounded-[30px] shadow-2xl"
     >
       <div className={cn("h-full w-full overflow-hidden rounded-2xl bg-white md:rounded-2xl", isMobile && "")}>{children}</div>
     </motion.div>
