@@ -1,15 +1,16 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-interface ContainerScrollProps {
-  titleComponent: React.ReactNode;
+export const ContainerScroll = ({
+  titleComponent,
+  children
+}: {
+  titleComponent: string | React.ReactNode;
   children: React.ReactNode;
-}
-
-export function ContainerScroll({ titleComponent, children }: ContainerScrollProps) {
+}) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -20,36 +21,67 @@ export function ContainerScroll({ titleComponent, children }: ContainerScrollPro
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const { scrollYProgress } = useScroll({ target: containerRef });
-  const rotate = useTransform(scrollYProgress, [0, 1], [16, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], [0.92, 1]);
-  const translate = useTransform(scrollYProgress, [0, 1], [0, -70]);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  const rotate = useTransform(scrollYProgress, [0, 1], [20, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1.05, 1]);
+  const translate = useTransform(scrollYProgress, [0, 1], [0, -100]);
 
   return (
     <div
-      className="flex min-h-[70rem] items-center justify-center p-4 md:p-10"
+      className="h-[60rem] md:h-[80rem] flex items-center justify-center relative p-2 md:p-20"
       ref={containerRef}
     >
-      <div className="w-full max-w-6xl py-14 md:py-20">
-        <motion.div style={{ translateY: translate }} className="mx-auto max-w-3xl text-center">
-          {titleComponent}
-        </motion.div>
-        <motion.div
-          style={{ rotateX: rotate, scale }}
-          className={cn(
-            "relative mx-auto mt-10 h-[30rem] w-full max-w-6xl rounded-[2rem] border border-[#d8dbe2]/70 bg-white p-4 shadow-[0_20px_60px_rgba(47,52,63,0.12)] md:h-[42rem] md:p-8",
-            "[transform-style:preserve-3d]"
-          )}
-        >
-          <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-b from-white to-[#f3f4f7]" />
-          <div className="relative z-10 h-full overflow-hidden rounded-[1.3rem] border border-[#d8dbe2]/70 bg-[#fcfcfd]">
-            {children}
-          </div>
-          {!isMobile && (
-            <div className="pointer-events-none absolute inset-0 rounded-[2rem] ring-1 ring-inset ring-white/70" />
-          )}
-        </motion.div>
+      <div className="py-10 md:py-40 w-full relative" style={{ perspective: "1000px" }}>
+        <Header translate={translate} titleComponent={titleComponent} />
+        <Card rotate={rotate} translate={translate} scale={scale} isMobile={isMobile}>
+          {children}
+        </Card>
       </div>
     </div>
   );
-}
+};
+
+export const Header = ({
+  translate,
+  titleComponent
+}: {
+  translate: import("framer-motion").MotionValue<number>;
+  titleComponent: string | React.ReactNode;
+}) => {
+  return (
+    <motion.div style={{ translateY: translate }} className="max-w-5xl mx-auto text-center">
+      {titleComponent}
+    </motion.div>
+  );
+};
+
+export const Card = ({
+  rotate,
+  scale,
+  children,
+  isMobile
+}: {
+  rotate: import("framer-motion").MotionValue<number>;
+  scale: import("framer-motion").MotionValue<number>;
+  translate: import("framer-motion").MotionValue<number>;
+  children: React.ReactNode;
+  isMobile: boolean;
+}) => {
+  return (
+    <motion.div
+      style={{
+        rotateX: rotate,
+        scale,
+        boxShadow:
+          "rgba(0, 0, 0, 0.08) 0px 30px 90px 0px, rgba(0, 0, 0, 0.08) 0px 8px 20px 0px"
+      }}
+      className="max-w-5xl -mt-12 h-[30rem] md:h-[40rem] w-full border-4 border-[#6C6C6C] p-2 md:p-6 bg-[#222222] rounded-[30px] shadow-2xl"
+    >
+      <div className={cn("h-full w-full overflow-hidden rounded-2xl bg-white md:rounded-2xl", isMobile && "")}>{children}</div>
+    </motion.div>
+  );
+};
