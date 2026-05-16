@@ -4,14 +4,14 @@ import { createContext, useContext, useMemo, useState } from "react";
 import { MotionConfig, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-type ProductSlide = { name: string; image: string };
+type Product = { name: string; image: string };
 
-type HoverSliderContextType = {
+type HoverSliderContextValue = {
   activeSlide: number;
   changeSlide: (index: number) => void;
 };
 
-const HoverSliderContext = createContext<HoverSliderContextType | null>(null);
+const HoverSliderContext = createContext<HoverSliderContextValue | null>(null);
 
 const splitText = (text: string) => text.split("");
 
@@ -39,22 +39,22 @@ export function HoverSlider({ children, className }: { children: React.ReactNode
   return (
     <MotionConfig transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}>
       <HoverSliderContext.Provider value={value}>
-        <div className={cn("relative z-20 mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 md:items-start", className)}>{children}</div>
+        <div className={cn("mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 md:items-start", className)}>{children}</div>
       </HoverSliderContext.Provider>
     </MotionConfig>
   );
 }
 
-export function TextStaggerHover({ text, index, className, onActivateExternal }: { text: string; index: number; className?: string; onActivateExternal?: (index:number)=>void }) {
+export function TextStaggerHover({ text, index, className }: { text: string; index: number; className?: string }) {
   const { activeSlide, changeSlide } = useHoverSliderContext();
-  const chars = splitText(text);
   const isActive = activeSlide === index;
+  const chars = splitText(text);
 
   return (
     <button
       type="button"
-      onMouseEnter={() => { changeSlide(index); onActivateExternal?.(index); }}
-      onFocus={() => { changeSlide(index); onActivateExternal?.(index); }}
+      onMouseEnter={() => changeSlide(index)}
+      onFocus={() => changeSlide(index)}
       className={cn("relative block overflow-hidden text-left text-3xl font-semibold leading-tight tracking-tight md:text-5xl", isActive ? "opacity-100" : "opacity-20", className)}
     >
       <span className="sr-only">{text}</span>
@@ -68,7 +68,7 @@ export function TextStaggerHover({ text, index, className, onActivateExternal }:
         </span>
         <span className="absolute inset-0">
           {chars.map((char, charIndex) => (
-            <motion.span key={`bot-${index}-${charIndex}`} className="inline-block whitespace-pre" animate={{ y: isActive ? "0%" : "110%" }} transition={{ delay: charIndex * 0.025, duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}>
+            <motion.span key={`bottom-${index}-${charIndex}`} className="inline-block whitespace-pre" animate={{ y: isActive ? "0%" : "110%" }} transition={{ delay: charIndex * 0.025, duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}>
               {char}
             </motion.span>
           ))}
@@ -87,14 +87,28 @@ export function HoverSliderImage({ index, src, alt }: { index: number; src: stri
   return <motion.img src={src} alt={alt} className="absolute inset-0 h-full w-full object-cover" initial="hidden" animate={activeSlide === index ? "visible" : "hidden"} variants={clipPathVariants} />;
 }
 
-export function ProductHoverSlider({ products, onSlideChange }: { products: ProductSlide[]; onSlideChange: (index: number) => void }) {
+const products: Product[] = [
+  { name: "Mithaq", image: "/projects/placeholders/mithaq.svg" },
+  { name: "PriorityPlanR", image: "/projects/placeholders/priorityplanr.svg" },
+  { name: "Viyra", image: "/projects/placeholders/viyra.svg" },
+  { name: "First Line AI", image: "/projects/placeholders/first-line-ai.svg" },
+  { name: "Smart NFC Guest Pass", image: "/projects/placeholders/smart-nfc-guest-pass.svg" },
+  { name: "Delicious Fitness", image: "/projects/placeholders/delicious-fitness.svg" }
+];
+
+export function ProductHoverSlider() {
   return (
-    <HoverSlider className="grid-cols-1">
-      <div className="relative z-30 flex flex-col items-start gap-1">
+    <HoverSlider>
+      <div className="relative z-20 flex flex-col items-start gap-1">
         {products.map((product, index) => (
-          <TextStaggerHover key={product.name} text={product.name} index={index} className="text-black" onActivateExternal={onSlideChange} />
+          <TextStaggerHover key={product.name} text={product.name} index={index} className="text-black" />
         ))}
       </div>
+      <HoverSliderImageWrap className="relative z-10">
+        {products.map((product, index) => (
+          <HoverSliderImage key={product.name} index={index} src={product.image} alt={product.name} />
+        ))}
+      </HoverSliderImageWrap>
     </HoverSlider>
   );
 }
