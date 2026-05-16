@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ProductHoverSlider } from "@/components/ui/product-hover-slider";
+import { ProductHoverSlider, products } from "@/components/ui/product-hover-slider";
 
 type Slide = { title: string; description: string; image: string; fallback: string };
 const slides: Slide[] = [
@@ -13,6 +13,7 @@ const slides: Slide[] = [
 
 export function InteractiveScrollingStory() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [activeProductImage, setActiveProductImage] = useState(products[0].image);
   const refs = useRef<Array<HTMLElement | null>>([]);
   const [failed, setFailed] = useState<Record<number, boolean>>({});
 
@@ -41,7 +42,7 @@ export function InteractiveScrollingStory() {
               <div className={`max-w-md transition-all duration-500 ${activeIndex===i?"opacity-100 translate-y-0":"opacity-0 translate-y-10"}`}>
                 <h2 className="text-5xl md:text-6xl font-bold leading-tight tracking-tighter whitespace-pre-line">{slide.title}</h2>
                 <p className="mt-6 max-w-md text-lg leading-relaxed md:text-xl">{slide.description}</p>
-                {i === 2 && <ProductHoverSlider />}
+                {i === 2 && <ProductHoverSlider onActiveProductChange={(product) => setActiveProductImage(product.image)} />}
               </div>
             </article>
           ))}
@@ -55,7 +56,7 @@ export function InteractiveScrollingStory() {
             <div className="transition-transform duration-700 ease-in-out h-full" style={{ transform: `translateY(-${activeIndex * 100}%)` }}>
               {slides.map((slide, i) => (
                 <div key={slide.title} className="h-[80vh] w-full rounded-2xl border-4 border-black/5 shadow-2xl overflow-hidden bg-white">
-                  <img src={failed[i] ? slide.fallback : slide.image} alt={slide.title} className="h-full w-full object-cover" onError={() => setFailed((p) => ({ ...p, [i]: true }))} />
+                  <img src={i === 2 ? activeProductImage : failed[i] ? slide.fallback : slide.image} alt={slide.title} className="h-full w-full object-cover" onError={() => setFailed((p) => ({ ...p, [i]: true }))} />
                 </div>
               ))}
             </div>
