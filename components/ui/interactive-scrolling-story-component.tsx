@@ -1,37 +1,124 @@
 "use client";
-import Image from "next/image";
-import { Globe2, Link2, Mail, Network, ShieldCheck, Sparkles } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
 
-type VK = "about"|"ai"|"portfolio"|"mithaq"|"viyra"|"smartnfc"|"firstline"|"priority"|"delicious"|"build"|"stack"|"industries"|"partnerships"|"contact";
-type Slide = {id:string;chapter:string;title:string;description:string;type:"mockup"|"image"|"contact";image?:string;visualKey:VK};
+import Image from "next/image";
+import { useEffect, useMemo, useRef, useState } from "react";
+
+type Slide = { title: string; description: string; image: string };
+
 const slides: Slide[] = [
-{id:"about",chapter:"Slide 1 — About",title:"SaaSolution SL",description:"SaaSolution SL is a Paradox FZCO company building intelligent SaaS infrastructure, AI-first platforms and scalable digital products for international markets.",type:"mockup",visualKey:"about"},
-{id:"ai-first",chapter:"Slide 2 — AI-First Development",title:"AI-First SaaS Development",description:"We design and build platforms that combine automation, cloud-native architecture and modern AI workflows to reduce manual work and improve business execution.",type:"mockup",visualKey:"ai"},
-{id:"portfolio",chapter:"Slide 3 — Product Portfolio",title:"Portfolio Platforms",description:"Our portfolio includes Mithaq, PriorityPlanR, Viyra, First Line AI, Smart NFC Guest Pass and Delicious Fitness — product initiatives built for legal-tech, real estate, hospitality, planning, support automation and fitness.",type:"mockup",visualKey:"portfolio"},
-{id:"mithaq",chapter:"Slide 4 — Mithaq",title:"Mithaq",description:"A digital Islamic prenup and will platform focused on structured onboarding, identity verification, guided agreement workflows and legal-tech automation.",type:"image",image:"/projects/mithaq.png",visualKey:"mithaq"},
-{id:"viyra",chapter:"Slide 5 — Viyra",title:"Viyra",description:"A luxury real estate automation platform connecting buyers, sellers, realtors, lawyers, notaries and photographers through AI-assisted workflows.",type:"image",image:"/projects/viyra.png",visualKey:"viyra"},
-{id:"smart-nfc",chapter:"Slide 6 — Smart NFC Guest Pass",title:"Smart NFC Guest Pass",description:"A digital guest access solution for hospitality and rentals, designed around NFC access, Apple Wallet and Google Wallet passes, reservation-based access and automated check-in and checkout flows.",type:"image",image:"/projects/smart-nfc.png",visualKey:"smartnfc"},
-{id:"first-line-ai",chapter:"Slide 7 — First Line AI",title:"First Line AI",description:"An AI agent and support automation platform for first-line response, escalation, workflow automation and 24/7 operational support.",type:"image",image:"/projects/first-line-ai.png",visualKey:"firstline"},
-{id:"priorityplanr",chapter:"Slide 8 — PriorityPlanR",title:"PriorityPlanR",description:"A smart planning and scheduling platform for operational planning, workflow optimization and structured coordination across teams.",type:"image",image:"/projects/priorityplanr.png",visualKey:"priority"},
-{id:"delicious",chapter:"Slide 9 — Delicious Fitness",title:"Delicious Fitness",description:"A social food, recipe and meal-prep platform focused on macro-aware recipes, multilingual content, fitness goals, chefs and community-driven food discovery.",type:"image",image:"/projects/delicious-fitness.png",visualKey:"delicious"},
-{id:"build",chapter:"Slide 10 — What We Build",title:"What We Build",description:"We build SaaS platforms, AI workflows, customer portals, admin panels, payment flows, identity systems, marketplaces, booking systems, legal-tech workflows, real estate automation, hospitality automation, API integrations and multilingual cloud-native applications.",type:"mockup",visualKey:"build"},
-{id:"stack",chapter:"Slide 11 — Technology Stack",title:"Modern SaaS Stack",description:"Our platforms are designed around Next.js, TypeScript, Tailwind CSS, shadcn/ui, Framer Motion, Supabase, Vercel, Railway, Stripe, AI/LLM integrations and API-first architecture.",type:"mockup",visualKey:"stack"},
-{id:"industries",chapter:"Slide 12 — Industries",title:"Industries We Serve",description:"SaaSolution SL builds for legal-tech, real estate, hospitality, fitness and nutrition, government and consular services, customer support automation, scheduling operations and AI workflow automation.",type:"mockup",visualKey:"industries"},
-{id:"partnerships",chapter:"Slide 13 — Partnerships",title:"Partnerships & Pilots",description:"SaaSolution SL is open to partnerships, pilots and international deployment opportunities with enterprises, governments, legal firms, real estate partners, hospitality operators, SaaS investors and technology partners.",type:"mockup",visualKey:"partnerships"},
-{id:"contact",chapter:"Slide 14 — Contact",title:"Partner With Us",description:"Let’s discuss how SaaSolution SL can help build, launch or scale intelligent SaaS infrastructure for your market.",type:"contact",visualKey:"contact"}
+  {
+    title: "SaaSolution SL",
+    description:
+      "SaaSolution SL is a Paradox FZCO company building SaaS platforms, AI workflows and scalable digital products for international markets.",
+    image: "/projects/mithaq.png"
+  },
+  {
+    title: "AI-First Platforms",
+    description: "We create software that combines automation, modern cloud architecture and AI-driven workflows.",
+    image: "/projects/first-line-ai.png"
+  },
+  {
+    title: "Product Portfolio",
+    description:
+      "Our portfolio includes Mithaq, PriorityPlanR, Viyra, First Line AI, Smart NFC Guest Pass and Delicious Fitness.",
+    image: "/projects/viyra.png"
+  },
+  {
+    title: "Built for Different Markets",
+    description:
+      "From legal-tech and real estate to hospitality, fitness, planning and support automation, SaaSolution SL builds platforms in different styles for different industries.",
+    image: "/projects/smart-nfc.png"
+  },
+  {
+    title: "Partner With Us",
+    description:
+      "We are open to partnerships, pilots and international deployment opportunities with enterprises, governments, legal firms, real estate partners, hospitality operators and technology partners.",
+    image: "/projects/priorityplanr.png"
+  }
 ];
 
-export function InteractiveScrollingStory(){
-  const refs=useRef<Array<HTMLElement|null>>([]); const [active,setActive]=useState(0); const [failed,setFailed]=useState<Record<string,boolean>>({});
-  useEffect(()=>{const o=new IntersectionObserver((es)=>{let b={idx:active,ratio:0};es.forEach(e=>{const i=Number((e.target as HTMLElement).dataset.index||0);if(e.intersectionRatio>b.ratio)b={idx:i,ratio:e.intersectionRatio};}); if(b.ratio>.35)setActive(b.idx);},{threshold:[.35,.5,.7],rootMargin:"-10% 0px -10% 0px"}); refs.current.forEach(el=>el&&o.observe(el)); return ()=>o.disconnect();},[active]);
-  const bg=["from-white via-neutral-50 to-neutral-100","from-neutral-50 via-white to-neutral-100","from-white via-neutral-100 to-neutral-50"][active%3];
-  return <section className={`relative bg-gradient-to-b ${bg} transition-colors duration-700`}><div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-6 py-10 md:grid-cols-12 md:gap-10 md:px-10"><div className="md:col-span-6">{slides.map((s,i)=><article key={s.id} data-index={i} ref={el=>{refs.current[i]=el;}} className="flex min-h-[72vh] items-center py-8"><div className={`transition-all duration-500 ${active===i?"opacity-100":"opacity-45"}`}><p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-black/50">{s.chapter}</p><h2 className="text-3xl font-semibold md:text-5xl">{s.title}</h2><p className="mt-5 max-w-xl text-base leading-relaxed text-black/70 md:text-lg">{s.description}</p></div></article>)}</div><div className="md:col-span-6"><div className="sticky top-4 md:top-8"><div className="mb-4 flex gap-2">{slides.map((_,i)=><div key={i} className="h-1.5 flex-1 overflow-hidden rounded-full bg-neutral-200"><div className={`h-full transition-all duration-500 ${i<=active?"w-full bg-black":"w-0 bg-black"}`}/></div>)}</div><div className="relative min-h-[420px] rounded-3xl border border-neutral-300 bg-white p-4 shadow-[0_20px_60px_rgba(0,0,0,0.12)] backdrop-blur-sm md:min-h-[560px] md:p-6"><StoryVisual slide={slides[active]} failed={failed[slides[active].id]} onError={()=>setFailed(p=>({...p,[slides[active].id]:true}))}/></div></div></div></div><footer className="border-t border-neutral-300 bg-white py-8 text-center text-sm text-black/70">© 2026 SaaSolution SL. A Paradox FZCO company. All rights reserved.</footer></section>
-}
+export function InteractiveScrollingStory() {
+  const [active, setActive] = useState(0);
+  const refs = useRef<Array<HTMLElement | null>>([]);
+  const [failedImages, setFailedImages] = useState<Record<number, boolean>>({});
 
-function StoryVisual({slide,failed,onError}:{slide:Slide;failed?:boolean;onError:()=>void}){
-  if(slide.type==="image"&&slide.image&&!failed) return <div className="relative h-[390px] overflow-hidden rounded-2xl border border-neutral-300 bg-neutral-50 md:h-[500px]"><Image src={slide.image} alt={`${slide.title} preview`} fill className="object-cover" onError={onError}/></div>;
-  if(slide.type==="contact") return <div className="space-y-4 rounded-2xl border border-neutral-300 bg-gradient-to-br from-white to-neutral-100 p-5"><h3 className="text-xl font-semibold">Partner with us</h3><div className="space-y-3 text-sm text-black/70"><p className="flex items-center gap-2"><Mail className="h-4 w-4"/> contact@saasolution.example</p><p className="flex items-center gap-2"><Link2 className="h-4 w-4"/> linkedin.com/company/saasolution-sl</p></div><form className="space-y-3"><input className="w-full rounded-lg border border-neutral-300 bg-white p-2" placeholder="Full name"/><input className="w-full rounded-lg border border-neutral-300 bg-white p-2" placeholder="Work email"/><textarea className="min-h-24 w-full rounded-lg border border-neutral-300 bg-white p-2" placeholder="Tell us about your project"/><button type="button" className="rounded-full bg-[#2f343f] px-4 py-2 text-sm text-white">Partner with us</button></form></div>;
-  const chips:Record<VK,string[]>={about:["Global Product Ops","AI Workflow Engine","Enterprise Governance"],ai:["Automation Nodes","Agent Routing","API Orchestration"],portfolio:["Mithaq","PriorityPlanR","Viyra","First Line AI","Smart NFC Guest Pass","Delicious Fitness"],mithaq:["Guided Onboarding","Identity Verification","Agreement Automation"],viyra:["Buyer/Seller Workflows","Agent Coordination","Legal Automation"],smartnfc:["NFC Entry","Wallet Passes","Reservation Rules"],firstline:["24/7 AI Triage","Escalation Layer","Ops Dashboard"],priority:["Scheduling Logic","Workload Planning","Team Coordination"],delicious:["Macro Recipes","Multilingual Content","Chef Community"],build:["Portals","Payments","Identity","Marketplaces","Bookings","Legal-Tech"],stack:["Next.js","TypeScript","Tailwind","shadcn/ui","Framer Motion","Supabase","Vercel","Railway","Stripe","LLMs"],industries:["Legal-Tech","Real Estate","Hospitality","Fitness","Government","Support Automation"],partnerships:["Enterprise Pilots","Government Programs","Legal Partnerships","Tech Alliances"],contact:["Discovery","Pilot Planning","Global Launch"]};
-  return <div className="h-full rounded-2xl border border-[#d8dbe2] bg-gradient-to-br from-white to-neutral-100 p-4"><div className="mb-4 grid grid-cols-3 gap-2 text-[11px] text-black/60"><div className="rounded-lg bg-white p-2">Status: Active</div><div className="rounded-lg bg-white p-2">Region: Global</div><div className="rounded-lg bg-white p-2">Mode: AI-First</div></div><div className="grid grid-cols-2 gap-2">{chips[slide.visualKey].map(c=><div key={c} className="rounded-lg border border-neutral-300 bg-white px-3 py-2 text-xs font-medium">{c}</div>)}</div><div className="mt-5 grid grid-cols-2 gap-2 text-xs text-black/70"><div className="rounded-lg bg-white p-3"><Sparkles className="mb-2 h-4 w-4 text-black"/> AI Workflow Layer</div><div className="rounded-lg bg-white p-3"><Network className="mb-2 h-4 w-4 text-black"/> API Connectivity</div><div className="rounded-lg bg-white p-3"><ShieldCheck className="mb-2 h-4 w-4 text-black"/> Compliance Ready</div><div className="rounded-lg bg-white p-3"><Globe2 className="mb-2 h-4 w-4 text-black"/> International Scale</div></div></div>;
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        let best = { idx: 0, ratio: 0 };
+        entries.forEach((entry) => {
+          const idx = Number((entry.target as HTMLElement).dataset.index || 0);
+          if (entry.intersectionRatio > best.ratio) best = { idx, ratio: entry.intersectionRatio };
+        });
+        if (best.ratio > 0.4) setActive(best.idx);
+      },
+      { threshold: [0.35, 0.5, 0.7], rootMargin: "-10% 0px -10% 0px" }
+    );
+
+    refs.current.forEach((el) => el && observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  const stack = useMemo(() => slides.map((_, i) => (i - active) * 56), [active]);
+
+  return (
+    <section className="relative bg-[#F6E548] text-black">
+      <div className="mx-auto grid min-h-screen max-w-7xl grid-cols-1 px-4 py-0 md:grid-cols-2 md:p-16">
+        <div className="relative flex min-h-screen flex-col justify-center pr-0 md:pr-7">
+          <div className="absolute left-0 top-16 flex w-[50%] space-x-2">
+            {slides.map((_, i) => (
+              <div key={i} className="h-1 w-full rounded-full bg-black/20">
+                <div className={`h-full rounded-full bg-black transition-all duration-500 ${i <= active ? "w-full" : "w-0"}`} />
+              </div>
+            ))}
+          </div>
+
+          {slides.map((slide, i) => (
+            <article
+              key={slide.title}
+              data-index={i}
+              ref={(el) => {
+                refs.current[i] = el;
+              }}
+              className="flex min-h-screen items-center"
+            >
+              <div className={`max-w-md transition-all duration-500 ${active === i ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
+                <h2 className="text-5xl font-bold leading-tight tracking-tighter md:text-6xl">{slide.title}</h2>
+                <p className="mt-6 text-lg md:text-xl">{slide.description}</p>
+              </div>
+            </article>
+          ))}
+
+          <button className="fixed bottom-16 left-4 rounded-full bg-black px-10 py-4 text-sm font-semibold tracking-wider text-white uppercase hover:bg-gray-800 md:left-16">
+            Partner with us
+          </button>
+        </div>
+
+        <div className="pointer-events-none sticky top-0 hidden h-screen items-center justify-center overflow-hidden border-r border-black/10 md:flex">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.05)_1px,transparent_1px)] bg-[size:40px_40px]" />
+          <div className="relative h-[80vh] w-full max-w-[200px]">
+            {slides.map((slide, idx) => {
+              const top = 50 + stack[idx];
+              const isActive = idx === active;
+              return (
+                <div
+                  key={slide.title}
+                  className="absolute left-1/2 h-64 w-48 -translate-x-1/2 overflow-hidden rounded-2xl border-4 border-black/5 bg-white shadow-2xl transition-all duration-700 ease-in-out"
+                  style={{ top: `${top}%`, transform: `translate(-50%, -50%) scale(${isActive ? 1 : 0.92})`, opacity: idx < active - 1 ? 0 : 1, zIndex: slides.length - idx }}
+                >
+                  {failedImages[idx] ? (
+                    <div className="flex h-full items-center justify-center bg-white p-8 text-center text-sm font-semibold">{slide.title}</div>
+                  ) : (
+                    <Image src={slide.image} alt={slide.title} fill className="object-cover" onError={() => setFailedImages((p) => ({ ...p, [idx]: true }))} />
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      <footer className="border-t border-black/10 bg-[#F6E548] py-8 text-center text-sm text-black/80">© 2026 SaaSolution SL. A Paradox FZCO company. All rights reserved.</footer>
+    </section>
+  );
 }
