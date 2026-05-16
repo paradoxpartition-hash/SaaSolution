@@ -1,4 +1,3 @@
-import { Sparkles } from "lucide-react";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { InteractiveScrollingStory } from "@/components/ui/interactive-scrolling-story-component";
 
@@ -18,10 +17,7 @@ export default function Home() {
         <ContainerScroll
           titleComponent={
             <div>
-              <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-black/20 bg-white px-4 py-1 text-sm font-semibold text-black/80">
-                <Sparkles className="h-4 w-4 text-black" /> SaaSolution SL
-              </p>
-              <h1 className="text-4xl md:text-[6rem] font-bold text-black">Building intelligent SaaS infrastructure for modern global businesses.</h1>
+                            <h1 className="text-4xl md:text-[6rem] font-bold text-black">Software that moves the needle.</h1>
               <p className="mx-auto mt-4 max-w-3xl text-base md:text-xl text-black/70">SaaSolution SL is a Paradox FZCO company developing AI-first platforms, automation systems and scalable digital products for international markets.</p>
             </div>
           }
