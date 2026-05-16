@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { AnimatedProductList } from "@/components/ui/animated-product-list";
 
 type Slide = { title: string; description: string; image: string; fallback: string };
 const slides: Slide[] = [
@@ -40,6 +41,7 @@ export function InteractiveScrollingStory() {
               <div className={`max-w-md transition-all duration-500 ${activeIndex===i?"opacity-100 translate-y-0":"opacity-0 translate-y-10"}`}>
                 <h2 className="text-5xl md:text-6xl font-bold leading-tight tracking-tighter whitespace-pre-line">{slide.title}</h2>
                 <p className="mt-6 max-w-md text-lg leading-relaxed md:text-xl">{slide.description}</p>
+                {i === 2 && <AnimatedProductList />}
               </div>
             </article>
           ))}
