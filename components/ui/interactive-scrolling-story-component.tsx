@@ -156,7 +156,7 @@ export function InteractiveScrollingStory() {
   const activeStoryStyle = storyStyles[activeIndex] ?? storyStyles[0];
 
   return (
-    <section className="relative bg-[#2563EB] text-black">
+    <section className="relative text-black transition-colors duration-700" style={{ backgroundColor: activeStoryStyle.background }}>
       <div className="mx-auto grid w-screen min-h-screen max-w-7xl grid-cols-1 p-8 transition-colors duration-700 md:grid-cols-2 md:p-16" style={{ backgroundColor: activeStoryStyle.background }}>
         <div className="relative">
           <div className="fixed top-16 left-4 md:left-16 flex w-[50%] max-w-[200px] space-x-2 z-10">
