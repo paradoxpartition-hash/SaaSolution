@@ -2,6 +2,7 @@
 
 import { type CSSProperties, useEffect, useMemo, useRef, useState } from "react";
 import { Clock3, Globe2, MapPin } from "lucide-react";
+import Link from "next/link";
 import { ProductHoverSlider, products } from "@/components/ui/product-hover-slider";
 import { StandardFooterLinks } from "@/components/ui/standard-footer-links";
 
@@ -218,7 +219,7 @@ export function InteractiveScrollingStory() {
             </article>
           ))}
 
-          <button className={`sticky bottom-16 rounded-full px-10 py-4 text-sm font-semibold uppercase tracking-wider transition-colors duration-700 ${activeStoryStyle.button}`}>Partner with us</button>
+          <Link className={`sticky bottom-16 inline-flex rounded-full px-10 py-4 text-sm font-semibold uppercase tracking-wider transition-colors duration-700 ${activeStoryStyle.button}`} href="/partners">Partner with us</Link>
         </div>
 
         <div
