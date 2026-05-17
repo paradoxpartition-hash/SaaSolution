@@ -70,7 +70,7 @@ export function ProductHoverSlider({ onActiveProductChange }: { onActiveProductC
               >
                 {product.name}
               </span>
-              <span className={cn("h-px flex-1 transition-colors duration-300", isActive ? "bg-black/20" : "bg-black/12")} />
+              <span className={cn("h-px flex-1 transition-colors duration-300", isActive ? "bg-[#050505]/20" : "bg-[#050505]/12")} />
               <span className={cn("w-8 text-right text-2xl tabular-nums transition-colors duration-300", isActive ? "text-black/70" : "text-black/30")}>{String(index + 1).padStart(2, "0")}</span>
             </button>
           );

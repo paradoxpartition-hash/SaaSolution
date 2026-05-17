@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { type CSSProperties, useEffect, useMemo, useRef, useState } from "react";
 import { Clock3, Globe2, MapPin } from "lucide-react";
 import { ProductHoverSlider, products } from "@/components/ui/product-hover-slider";
+import { StandardFooterLinks } from "@/components/ui/standard-footer-links";
 
 type Slide = { title: string; description: string; image: string; fallback: string };
 type Office = { label: string; city: string; country: string; zone: string; timeZone: string; hours: string; startHour: number; endHour: number; coordinates: string; status: string; tone: string; color: string };
@@ -13,7 +14,14 @@ const slides: Slide[] = [
   { title: "About SaaSolutions", description: "We are SaaSolutions — a studio of engineers and designers shipping cinematic products for ambitious companies. From commerce to AI agents to connected hardware, we build the things your customers can't stop talking about.", image: "https://images.unsplash.com/photo-1564865878688-9a244444042a?q=80&w=2070&auto=format&fit=crop", fallback: "https://images.unsplash.com/photo-1564865878688-9a244444042a?q=80&w=2070&auto=format&fit=crop" },
   { title: "AI-First Platforms", description: "We create software that combines automation, modern cloud architecture and AI-driven workflows.", image: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=2070&auto=format&fit=crop", fallback: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=2070&auto=format&fit=crop" },
   { title: "Six products.\nOne obsession with craft.", description: "Every line of code, every pixel, every interaction — engineered to make your customers feel something. Here's what we're shipping right now.", image: "https://images.unsplash.com/photo-1608306448197-e83633f1261c?q=80&w=1974&auto=format&fit=crop", fallback: "https://images.unsplash.com/photo-1608306448197-e83633f1261c?q=80&w=1974&auto=format&fit=crop" },
-  { title: "Partner With Us", description: "We are open to partnerships, pilots and international deployment opportunities with enterprises, governments, legal firms, real estate partners, hospitality operators and technology partners.", image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop", fallback: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop" }
+  { title: "Partner With Us", description: "We are open to partnerships, pilots and international deployment opportunities with enterprises, governments, operators and technology partners.", image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop", fallback: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop" }
+];
+
+const storyStyles = [
+  { background: "#2563EB", grid: "rgba(255,255,255,0.16)", title: "tracking-tight text-white", body: "text-white/82", button: "bg-[#050505] text-[#F3F2EE]" },
+  { background: "#DC2626", grid: "rgba(255,255,255,0.14)", title: "tracking-normal text-white", body: "text-white/82", button: "bg-[#050505] text-[#F3F2EE]" },
+  { background: "#FFF100", grid: "rgba(0,0,0,0.05)", title: "tracking-tighter text-black", body: "text-black/78", button: "bg-[#050505] text-[#FFF100]" },
+  { background: "#16A34A", grid: "rgba(255,255,255,0.14)", title: "tracking-tight text-white", body: "text-white/82", button: "bg-[#050505] text-[#F3F2EE]" }
 ];
 
 const offices: Office[] = [
@@ -113,34 +121,35 @@ export function InteractiveScrollingStory() {
   const activeSegment = coverageSegments.find((segment) => localMinutes >= segment.start && localMinutes < segment.end);
   const currentSupportOffice = activeSegment?.office ?? offices.find((office) => office.city === "Ceuta") ?? offices[0];
   const currentSupportStatus = activeSegment ? "Current support is running from" : "Current support is on-call from";
+  const activeStoryStyle = storyStyles[activeIndex] ?? storyStyles[0];
 
   return (
-    <section className="relative bg-[#fff100] text-black">
-      <div className="mx-auto grid w-screen min-h-screen max-w-7xl grid-cols-1 md:grid-cols-2 p-8 md:p-16">
+    <section className="relative bg-[#2563EB] text-black">
+      <div className="mx-auto grid w-screen min-h-screen max-w-7xl grid-cols-1 p-8 transition-colors duration-700 md:grid-cols-2 md:p-16" style={{ backgroundColor: activeStoryStyle.background }}>
         <div className="relative">
           <div className="fixed top-16 left-4 md:left-16 flex w-[50%] max-w-[200px] space-x-2 z-10">
-            {slides.map((_, i) => <div key={i} className="h-1 w-full rounded-full bg-black/20"><div className={`h-full bg-black rounded-full transition-all duration-500 ${i<=activeIndex?"w-full":"w-0"}`} /></div>)}
+            {slides.map((_, i) => <div key={i} className="h-1 w-full rounded-full bg-[#050505]/20"><div className={`h-full bg-[#050505] rounded-full transition-all duration-500 ${i<=activeIndex?"w-full":"w-0"}`} /></div>)}
           </div>
 
           {slides.map((slide, i) => (
             <article key={slide.title} data-index={i} ref={(el) => { refs.current[i] = el; }} className="min-h-screen flex items-center">
               <div className={`max-w-md transition-all duration-500 ${activeIndex===i?"opacity-100 translate-y-0":"opacity-0 translate-y-10"}`}>
-                <h2 className="text-5xl md:text-6xl font-bold leading-tight tracking-tighter whitespace-pre-line">{slide.title}</h2>
-                <p className="mt-6 max-w-md text-lg leading-relaxed md:text-xl">{slide.description}</p>
+                <h2 className={`whitespace-pre-line text-5xl font-bold leading-tight transition-all duration-700 md:text-6xl ${activeStoryStyle.title}`}>{slide.title}</h2>
+                <p className={`mt-6 max-w-md text-lg leading-relaxed transition-colors duration-700 md:text-xl ${activeStoryStyle.body}`}>{slide.description}</p>
                 {i === 2 && <ProductHoverSlider onActiveProductChange={(product) => setActiveProductImage(product.image)} />}
               </div>
             </article>
           ))}
 
-          <button className="sticky bottom-16 bg-black text-white px-10 py-4 rounded-full text-sm font-semibold tracking-wider uppercase">Partner with us</button>
+          <button className={`sticky bottom-16 rounded-full px-10 py-4 text-sm font-semibold uppercase tracking-wider transition-colors duration-700 ${activeStoryStyle.button}`}>Partner with us</button>
         </div>
 
         <div className="hidden md:flex sticky top-0 h-screen border-r border-black/10 justify-center items-center overflow-hidden relative">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.05)_1px,transparent_1px)] bg-[size:40px_40px]" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--story-grid)_1px,transparent_1px),linear-gradient(to_bottom,var(--story-grid)_1px,transparent_1px)] bg-[size:40px_40px] transition-colors duration-700" style={{ "--story-grid": activeStoryStyle.grid } as CSSProperties} />
           <div className="relative h-[80vh] w-[500px] max-w-[calc(100%-3rem)] overflow-hidden">
             <div className="transition-transform duration-700 ease-in-out h-full" style={{ transform: `translateY(-${activeIndex * 100}%)` }}>
               {slides.map((slide, i) => (
-                <div key={slide.title} className="h-[80vh] w-full rounded-2xl border-4 border-black/5 shadow-2xl overflow-hidden bg-white">
+                <div key={slide.title} className="h-[80vh] w-full overflow-hidden rounded-2xl border-4 border-black/5 bg-[#F3F2EE] shadow-2xl">
                   <img src={i === 2 ? activeProductImage : failed[i] ? slide.fallback : slide.image} alt={slide.title} className="h-full w-full object-cover" onError={() => setFailed((p) => ({ ...p, [i]: true }))} />
                 </div>
               ))}
@@ -148,7 +157,7 @@ export function InteractiveScrollingStory() {
           </div>
         </div>
       </div>
-      <div className="bg-black px-6 py-20 text-white md:px-16">
+      <div className="bg-[#050505] px-6 py-20 text-white md:px-16">
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
             <div>
@@ -156,7 +165,7 @@ export function InteractiveScrollingStory() {
               <h2 className="mt-6 max-w-3xl text-5xl font-bold leading-none tracking-tight md:text-6xl">Three offices.</h2>
               <p className="mt-5 max-w-3xl text-2xl leading-tight text-white/55 md:text-3xl">Support follows the office whose local workday is active now.</p>
             </div>
-            <div className="inline-flex w-fit items-center gap-3 rounded-lg border border-white/10 bg-white/[0.04] px-5 py-4 text-xs font-bold uppercase tracking-[0.32em] text-white/70 shadow-[0_20px_80px_rgba(0,0,0,0.35)]">
+            <div className="inline-flex w-fit items-center gap-3 rounded-lg border border-white/10 bg-[#111111] px-5 py-4 text-xs font-bold uppercase tracking-[0.32em] text-white/70 shadow-[0_20px_80px_rgba(0,0,0,0.35)]">
               <span className="h-3 w-3 rounded-full bg-emerald-400 shadow-[0_0_18px_rgba(52,211,153,0.95)]" />
               Follow-the-sun - 24/7 support
             </div>
@@ -164,9 +173,9 @@ export function InteractiveScrollingStory() {
 
           <div className="mt-16 grid gap-5 md:grid-cols-3">
             {offices.map((office) => (
-              <article key={office.city} className={`rounded-lg border p-8 shadow-[0_18px_70px_rgba(0,0,0,0.24)] ${office.city === currentSupportOffice.city ? "border-cyan-300/50 bg-white/[0.08]" : "border-white/10 bg-white/[0.045]"}`}>
+              <article key={office.city} className={`rounded-lg border p-8 shadow-[0_18px_70px_rgba(0,0,0,0.24)] ${office.city === currentSupportOffice.city ? "border-cyan-300/50 bg-[#16201f]" : "border-white/10 bg-[#101010]"}`}>
                 <div className="flex items-center justify-between">
-                  <div className="grid h-11 w-11 place-items-center rounded-lg border border-white/12 bg-white/[0.06]">
+                  <div className="grid h-11 w-11 place-items-center rounded-lg border border-white/12 bg-[#171717]">
                     <MapPin className="h-5 w-5 text-white" />
                   </div>
                   <span className="inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.25em] text-white/70">
@@ -191,17 +200,17 @@ export function InteractiveScrollingStory() {
             ))}
           </div>
 
-          <div className="mt-10 rounded-lg border border-white/10 bg-white/[0.04] p-8">
+          <div className="mt-10 rounded-lg border border-white/10 bg-[#101010] p-8">
             <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-[0.42em] text-white/35">- 24-hour coverage, visualized</p>
                 <p className="mt-2 text-sm text-white/45">{currentSupportStatus} {currentSupportOffice.city}, {currentSupportOffice.country}.</p>
               </div>
-              <div className="rounded-full border border-white/10 bg-black/35 px-4 py-2 font-mono text-xs text-white/60">
+              <div className="rounded-full border border-white/10 bg-[#050505]/35 px-4 py-2 font-mono text-xs text-white/60">
                 {localClock ? `${formatLocalTime(localClock.date)} - ${localClock.timeZone}` : "Reading local time..."}
               </div>
             </div>
-            <div className="mt-8 rounded-lg border border-white/10 bg-white/[0.035] p-4">
+            <div className="mt-8 rounded-lg border border-white/10 bg-[#111111] p-4">
               <div className="ml-28 flex justify-between font-mono text-[11px] text-white/35">
                 <span>00</span>
                 <span>06</span>
@@ -229,15 +238,15 @@ export function InteractiveScrollingStory() {
                           />
                         ))}
                         <div
-                          className="absolute top-0 z-10 h-full w-px bg-white shadow-[0_0_18px_rgba(255,255,255,0.9)] transition-[left] duration-700"
+                          className="absolute top-0 z-10 h-full w-px bg-[#F3F2EE] shadow-[0_0_18px_rgba(243,242,238,0.9)] transition-[left] duration-700"
                           style={{ left: `calc(${localProgress}% + ${markerOffsetRem}rem)` }}
                         >
                           {isCurrentOffice && (
-                            <span className="absolute -top-1 left-1/2 h-3 w-3 -translate-x-1/2 rounded-full bg-white shadow-[0_0_20px_rgba(34,211,238,0.9)]" />
+                            <span className="absolute -top-1 left-1/2 h-3 w-3 -translate-x-1/2 rounded-full bg-[#F3F2EE] shadow-[0_0_20px_rgba(34,211,238,0.9)]" />
                           )}
                         </div>
                         {isCurrentOffice && (
-                          <span className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-black">
+                          <span className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-full bg-[#F3F2EE] px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-black">
                             {activeSegment ? "Active" : "On-call"}
                           </span>
                         )}
@@ -247,7 +256,7 @@ export function InteractiveScrollingStory() {
                 })}
               </div>
             </div>
-            <div className="mt-8 rounded-lg border border-white/10 bg-black/25 p-4">
+            <div className="mt-8 rounded-lg border border-white/10 bg-[#050505]/25 p-4">
               <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/35">Current support country</p>
               <div className="mt-3 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
                 <p className="text-2xl font-bold tracking-tight">{currentSupportOffice.country}</p>
@@ -264,6 +273,7 @@ export function InteractiveScrollingStory() {
           </div>
         </div>
       </div>
+      <StandardFooterLinks />
       <footer className="border-t border-black/10 bg-[#fff100] py-8 text-center text-sm text-black/80">© 2026 SaaSolution SL. A Paradox FZCO company. All rights reserved.</footer>
     </section>
   );
