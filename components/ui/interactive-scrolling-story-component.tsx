@@ -18,10 +18,42 @@ const slides: Slide[] = [
 ];
 
 const storyStyles = [
-  { background: "#2563EB", grid: "rgba(255,255,255,0.16)", title: "tracking-tight text-white", body: "text-white/82", button: "bg-[#050505] text-[#F3F2EE]" },
-  { background: "#DC2626", grid: "rgba(255,255,255,0.14)", title: "tracking-normal text-white", body: "text-white/82", button: "bg-[#050505] text-[#F3F2EE]" },
-  { background: "#FFF100", grid: "rgba(0,0,0,0.05)", title: "tracking-tighter text-black", body: "text-black/78", button: "bg-[#050505] text-[#FFF100]" },
-  { background: "#16A34A", grid: "rgba(255,255,255,0.14)", title: "tracking-tight text-white", body: "text-white/82", button: "bg-[#050505] text-[#F3F2EE]" }
+  {
+    background: "#2563EB",
+    accent: "#1D4ED8",
+    accentSoft: "rgba(147,197,253,0.52)",
+    grid: "rgba(147,197,253,0.34)",
+    title: "tracking-tight text-white",
+    body: "text-white/82",
+    button: "bg-[#050505] text-[#F3F2EE]"
+  },
+  {
+    background: "#DC2626",
+    accent: "#B91C1C",
+    accentSoft: "rgba(252,165,165,0.52)",
+    grid: "rgba(252,165,165,0.34)",
+    title: "tracking-normal text-white",
+    body: "text-white/82",
+    button: "bg-[#050505] text-[#F3F2EE]"
+  },
+  {
+    background: "#FFF100",
+    accent: "#CA8A04",
+    accentSoft: "rgba(133,77,14,0.34)",
+    grid: "rgba(133,77,14,0.22)",
+    title: "tracking-tighter text-black",
+    body: "text-black/78",
+    button: "bg-[#050505] text-[#FFF100]"
+  },
+  {
+    background: "#16A34A",
+    accent: "#15803D",
+    accentSoft: "rgba(134,239,172,0.52)",
+    grid: "rgba(134,239,172,0.34)",
+    title: "tracking-tight text-white",
+    body: "text-white/82",
+    button: "bg-[#050505] text-[#F3F2EE]"
+  }
 ];
 
 const offices: Office[] = [
@@ -128,7 +160,14 @@ export function InteractiveScrollingStory() {
       <div className="mx-auto grid w-screen min-h-screen max-w-7xl grid-cols-1 p-8 transition-colors duration-700 md:grid-cols-2 md:p-16" style={{ backgroundColor: activeStoryStyle.background }}>
         <div className="relative">
           <div className="fixed top-16 left-4 md:left-16 flex w-[50%] max-w-[200px] space-x-2 z-10">
-            {slides.map((_, i) => <div key={i} className="h-1 w-full rounded-full bg-[#050505]/20"><div className={`h-full bg-[#050505] rounded-full transition-all duration-500 ${i<=activeIndex?"w-full":"w-0"}`} /></div>)}
+            {slides.map((_, i) => (
+              <div className="h-1 w-full rounded-full transition-colors duration-700" key={i} style={{ backgroundColor: activeStoryStyle.accentSoft }}>
+                <div
+                  className={`h-full rounded-full transition-all duration-500 ${i <= activeIndex ? "w-full" : "w-0"}`}
+                  style={{ backgroundColor: activeStoryStyle.accent }}
+                />
+              </div>
+            ))}
           </div>
 
           {slides.map((slide, i) => (
@@ -144,12 +183,19 @@ export function InteractiveScrollingStory() {
           <button className={`sticky bottom-16 rounded-full px-10 py-4 text-sm font-semibold uppercase tracking-wider transition-colors duration-700 ${activeStoryStyle.button}`}>Partner with us</button>
         </div>
 
-        <div className="hidden md:flex sticky top-0 h-screen border-r border-black/10 justify-center items-center overflow-hidden relative">
+        <div
+          className="hidden md:flex sticky top-0 h-screen justify-center items-center overflow-hidden relative border-r transition-colors duration-700"
+          style={{ borderColor: activeStoryStyle.accent }}
+        >
           <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--story-grid)_1px,transparent_1px),linear-gradient(to_bottom,var(--story-grid)_1px,transparent_1px)] bg-[size:40px_40px] transition-colors duration-700" style={{ "--story-grid": activeStoryStyle.grid } as CSSProperties} />
           <div className="relative h-[80vh] w-[500px] max-w-[calc(100%-3rem)] overflow-hidden">
             <div className="transition-transform duration-700 ease-in-out h-full" style={{ transform: `translateY(-${activeIndex * 100}%)` }}>
               {slides.map((slide, i) => (
-                <div key={slide.title} className="h-[80vh] w-full overflow-hidden rounded-2xl border-4 border-black/5 bg-[#F3F2EE] shadow-2xl">
+                <div
+                  className="h-[80vh] w-full overflow-hidden rounded-2xl border-4 bg-[#F3F2EE] shadow-2xl transition-colors duration-700"
+                  key={slide.title}
+                  style={{ borderColor: activeStoryStyle.accent }}
+                >
                   <img src={i === 2 ? activeProductImage : failed[i] ? slide.fallback : slide.image} alt={slide.title} className="h-full w-full object-cover" onError={() => setFailed((p) => ({ ...p, [i]: true }))} />
                 </div>
               ))}
