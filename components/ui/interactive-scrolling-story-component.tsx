@@ -5,14 +5,25 @@ import { Clock3, Globe2, MapPin } from "lucide-react";
 import { ProductHoverSlider, products } from "@/components/ui/product-hover-slider";
 import { StandardFooterLinks } from "@/components/ui/standard-footer-links";
 
-type Slide = { title: string; description: string; image: string; fallback: string };
+type Slide = { title: string; description: string; image: string; fallback: string; variant?: "method" };
 type Office = { label: string; city: string; country: string; zone: string; timeZone: string; hours: string; startHour: number; endHour: number; coordinates: string; status: string; tone: string; color: string };
 type LocalClock = { date: Date; timeZone: string };
 type CoverageSegment = { office: Office; start: number; end: number };
+type MethodStep = { number: string; title: string; body: string };
+
+const productSlideIndex = 3;
+
+const methodSteps: MethodStep[] = [
+  { number: "01", title: "Discover", body: "We audit, interview, and pressure-test your brief. You walk out with a clarity document, not a slide deck." },
+  { number: "02", title: "Design", body: "High-fidelity prototypes wired to real data. Every interaction defended with research." },
+  { number: "03", title: "Build", body: "Weekly demos. Production deploys from week one. No 'big reveal' surprises." },
+  { number: "04", title: "Scale", body: "We stay on as a partner - performance tuning, growth loops, and expansion into new markets." }
+];
 
 const slides: Slide[] = [
   { title: "About SaaSolutions", description: "We are SaaSolutions — a studio of engineers and designers shipping cinematic products for ambitious companies. From commerce to AI agents to connected hardware, we build the things your customers can't stop talking about.", image: "https://images.unsplash.com/photo-1564865878688-9a244444042a?q=80&w=2070&auto=format&fit=crop", fallback: "https://images.unsplash.com/photo-1564865878688-9a244444042a?q=80&w=2070&auto=format&fit=crop" },
   { title: "AI-First Platforms", description: "We create software that combines automation, modern cloud architecture and AI-driven workflows.", image: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=2070&auto=format&fit=crop", fallback: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=2070&auto=format&fit=crop" },
+  { title: "How we turn a brief\ninto a breakout.", description: "The SaaSolutions Method", image: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop", fallback: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop", variant: "method" },
   { title: "Six products.\nOne obsession with craft.", description: "Every line of code, every pixel, every interaction — engineered to make your customers feel something. Here's what we're shipping right now.", image: "https://images.unsplash.com/photo-1608306448197-e83633f1261c?q=80&w=1974&auto=format&fit=crop", fallback: "https://images.unsplash.com/photo-1608306448197-e83633f1261c?q=80&w=1974&auto=format&fit=crop" },
   { title: "Partner With Us", description: "We are open to partnerships, pilots and international deployment opportunities with enterprises, governments, operators and technology partners.", image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop", fallback: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop" }
 ];
@@ -35,6 +46,15 @@ const storyStyles = [
     title: "tracking-normal text-white",
     body: "text-white/82",
     button: "bg-[#050505] text-[#F3F2EE]"
+  },
+  {
+    background: "#F97316",
+    accent: "#EA580C",
+    accentSoft: "rgba(251,146,60,0.46)",
+    grid: "rgba(154,52,18,0.22)",
+    title: "tracking-tight text-black",
+    body: "text-black/72",
+    button: "bg-[#050505] text-[#F97316]"
   },
   {
     background: "#FFF100",
@@ -172,10 +192,28 @@ export function InteractiveScrollingStory() {
 
           {slides.map((slide, i) => (
             <article key={slide.title} data-index={i} ref={(el) => { refs.current[i] = el; }} className="min-h-screen flex items-center">
-              <div className={`max-w-md transition-all duration-500 ${activeIndex===i?"opacity-100 translate-y-0":"opacity-0 translate-y-10"}`}>
-                <h2 className={`whitespace-pre-line text-5xl font-bold leading-tight transition-all duration-700 md:text-6xl ${activeStoryStyle.title}`}>{slide.title}</h2>
-                <p className={`mt-6 max-w-md text-lg leading-relaxed transition-colors duration-700 md:text-xl ${activeStoryStyle.body}`}>{slide.description}</p>
-                {i === 2 && <ProductHoverSlider onActiveProductChange={(product) => setActiveProductImage(product.image)} />}
+              <div className={`${slide.variant === "method" ? "max-w-3xl" : "max-w-md"} transition-all duration-500 ${activeIndex===i?"opacity-100 translate-y-0":"opacity-0 translate-y-10"}`}>
+                {slide.variant === "method" ? (
+                  <>
+                    <p className="text-xs font-bold uppercase tracking-[0.42em] text-black/70">- The SaaSolutions Method</p>
+                    <h2 className={`mt-6 whitespace-pre-line text-5xl font-bold leading-tight transition-all duration-700 md:text-6xl ${activeStoryStyle.title}`}>{slide.title}</h2>
+                    <div className="mt-16 grid gap-8 md:grid-cols-2">
+                      {methodSteps.map((step) => (
+                        <section className="border-t border-black/25 pt-8" key={step.number}>
+                          <p className="font-mono text-sm text-black/45">{step.number}</p>
+                          <h3 className="mt-7 text-2xl font-bold tracking-tight text-black">{step.title}</h3>
+                          <p className="mt-5 max-w-xs text-base font-semibold leading-relaxed text-black/64">{step.body}</p>
+                        </section>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <h2 className={`whitespace-pre-line text-5xl font-bold leading-tight transition-all duration-700 md:text-6xl ${activeStoryStyle.title}`}>{slide.title}</h2>
+                    <p className={`mt-6 max-w-md text-lg leading-relaxed transition-colors duration-700 md:text-xl ${activeStoryStyle.body}`}>{slide.description}</p>
+                    {i === productSlideIndex && <ProductHoverSlider onActiveProductChange={(product) => setActiveProductImage(product.image)} />}
+                  </>
+                )}
               </div>
             </article>
           ))}
@@ -196,7 +234,7 @@ export function InteractiveScrollingStory() {
                   key={slide.title}
                   style={{ borderColor: activeStoryStyle.accent }}
                 >
-                  <img src={i === 2 ? activeProductImage : failed[i] ? slide.fallback : slide.image} alt={slide.title} className="h-full w-full object-cover" onError={() => setFailed((p) => ({ ...p, [i]: true }))} />
+                  <img src={i === productSlideIndex ? activeProductImage : failed[i] ? slide.fallback : slide.image} alt={slide.title} className="h-full w-full object-cover" onError={() => setFailed((p) => ({ ...p, [i]: true }))} />
                 </div>
               ))}
             </div>
