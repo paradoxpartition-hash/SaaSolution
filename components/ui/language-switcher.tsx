@@ -1,6 +1,10 @@
+"use client";
+
+import { useRouter } from "next/navigation";
 import { common, languageNames, locales, type Locale } from "@/lib/i18n";
 
 export function LanguageSwitcher({ locale, tone = "light" }: { locale: Locale; tone?: "light" | "dark" }) {
+  const router = useRouter();
   const t = common[locale];
   const base =
     tone === "dark"
@@ -8,20 +12,26 @@ export function LanguageSwitcher({ locale, tone = "light" }: { locale: Locale; t
       : "border-black/12 bg-white/60 text-black/65 hover:border-black/35 hover:text-black focus:ring-black/30";
   const active = tone === "dark" ? "bg-white text-black border-white" : "bg-black text-white border-black";
 
+  function switchLanguage(nextLocale: Locale) {
+    document.cookie = `saas-locale=${nextLocale}; path=/; max-age=31536000; SameSite=Lax`;
+    router.refresh();
+  }
+
   return (
     <nav aria-label={t.language} className="flex flex-wrap items-center gap-2">
       {locales.map((item) => (
-        <a
+        <button
           aria-current={item === locale ? "true" : undefined}
           className={`rounded-full border px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] transition focus:outline-none focus:ring-2 ${
             item === locale ? active : base
           }`}
-          href={`?lang=${item}`}
           key={item}
+          onClick={() => switchLanguage(item)}
           title={languageNames[item]}
+          type="button"
         >
           {item}
-        </a>
+        </button>
       ))}
       <span className={tone === "dark" ? "sr-only" : "sr-only"}>{t.languageNote}</span>
     </nav>
