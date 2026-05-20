@@ -5,6 +5,7 @@ import { Clock3, Globe2, MapPin } from "lucide-react";
 import Link from "next/link";
 import { ProductHoverSlider, products } from "@/components/ui/product-hover-slider";
 import { StandardFooterLinks } from "@/components/ui/standard-footer-links";
+import { common, countryNames, storyContent, type Locale } from "@/lib/i18n";
 
 type Slide = { title: string; description: string; image: string; fallback: string; variant?: "method" };
 type Office = { label: string; city: string; country: string; zone: string; timeZone: string; hours: string; startHour: number; endHour: number; coordinates: string; status: string; tone: string; color: string };
@@ -141,7 +142,41 @@ function formatLocalTime(date: Date) {
   return new Intl.DateTimeFormat(undefined, { hour: "2-digit", minute: "2-digit" }).format(date);
 }
 
-export function InteractiveScrollingStory() {
+export function InteractiveScrollingStory({ locale }: { locale: Locale }) {
+  const c = common[locale];
+  const t = storyContent[locale];
+  const names = countryNames[locale];
+  const officeLabels = {
+    es: { "Americas Hub": "Hub Americas", "Global Headquarters": "Sede global", "APAC Support Hub": "Hub soporte APAC", Live: "Activo" },
+    en: { "Americas Hub": "Americas Hub", "Global Headquarters": "Global Headquarters", "APAC Support Hub": "APAC Support Hub", Live: "Live" },
+    nl: { "Americas Hub": "Americas Hub", "Global Headquarters": "Wereldwijde hoofdzetel", "APAC Support Hub": "APAC Support Hub", Live: "Live" },
+    de: { "Americas Hub": "Americas Hub", "Global Headquarters": "Globale Zentrale", "APAC Support Hub": "APAC Support Hub", Live: "Live" }
+  }[locale];
+  const translatedSlides = t.slides as string[][];
+  const slides: Slide[] = translatedSlides.map(([title, description], index) => ({
+    title,
+    description,
+    image: [
+      "https://images.unsplash.com/photo-1564865878688-9a244444042a?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1608306448197-e83633f1261c?q=80&w=1974&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop"
+    ][index],
+    fallback: [
+      "https://images.unsplash.com/photo-1564865878688-9a244444042a?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1608306448197-e83633f1261c?q=80&w=1974&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop"
+    ][index],
+    variant: index === 2 ? "method" : undefined
+  }));
+  const methodSteps: MethodStep[] = (t.methodSteps as string[][]).map(([title, body], index) => ({
+    number: String(index + 1).padStart(2, "0"),
+    title,
+    body
+  }));
   const [activeIndex, setActiveIndex] = useState(0);
   const [activeProductImage, setActiveProductImage] = useState(products[0].image);
   const [localClock, setLocalClock] = useState<LocalClock | null>(null);
@@ -173,7 +208,7 @@ export function InteractiveScrollingStory() {
   const localMinutes = localClock ? getLocalMinutes(localClock.date) : 0;
   const activeSegment = coverageSegments.find((segment) => localMinutes >= segment.start && localMinutes < segment.end);
   const currentSupportOffice = activeSegment?.office ?? offices.find((office) => office.city === "Ceuta") ?? offices[0];
-  const currentSupportStatus = activeSegment ? "Current support is running from" : "Current support is on-call from";
+  const currentSupportStatus = activeSegment ? t.supportRunning : t.supportOnCall;
   const activeStoryStyle = storyStyles[activeIndex] ?? storyStyles[0];
 
   return (
@@ -196,7 +231,7 @@ export function InteractiveScrollingStory() {
               <div className={`${slide.variant === "method" ? "max-w-3xl" : "max-w-md"} transition-all duration-500 ${activeIndex===i?"opacity-100 translate-y-0":"opacity-0 translate-y-10"}`}>
                 {slide.variant === "method" ? (
                   <>
-                    <p className="text-xs font-bold uppercase tracking-[0.42em] text-black/70">- The SaaSolutions Method</p>
+                    <p className="text-xs font-bold uppercase tracking-[0.42em] text-black/70">{t.methodLabel}</p>
                     <h2 className={`mt-6 whitespace-pre-line text-5xl font-bold leading-tight transition-all duration-700 md:text-6xl ${activeStoryStyle.title}`}>{slide.title}</h2>
                     <div className="mt-16 grid gap-8 md:grid-cols-2">
                       {methodSteps.map((step) => (
@@ -219,7 +254,7 @@ export function InteractiveScrollingStory() {
             </article>
           ))}
 
-          <Link className={`sticky bottom-16 inline-flex rounded-full px-10 py-4 text-sm font-semibold uppercase tracking-wider transition-colors duration-700 ${activeStoryStyle.button}`} href="/partners">Partner with us</Link>
+          <Link className={`sticky bottom-16 inline-flex rounded-full px-10 py-4 text-sm font-semibold uppercase tracking-wider transition-colors duration-700 ${activeStoryStyle.button}`} href="/partners">{t.partnerCta}</Link>
         </div>
 
         <div
@@ -246,13 +281,13 @@ export function InteractiveScrollingStory() {
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.42em] text-cyan-300">- Global Presence</p>
-              <h2 className="mt-6 max-w-3xl text-5xl font-bold leading-none tracking-tight md:text-6xl">Three offices.</h2>
-              <p className="mt-5 max-w-3xl text-2xl leading-tight text-white/55 md:text-3xl">Support follows the office whose local workday is active now.</p>
+              <p className="text-xs font-bold uppercase tracking-[0.42em] text-cyan-300">{t.presenceLabel}</p>
+              <h2 className="mt-6 max-w-3xl text-5xl font-bold leading-none tracking-tight md:text-6xl">{t.officesTitle}</h2>
+              <p className="mt-5 max-w-3xl text-2xl leading-tight text-white/55 md:text-3xl">{t.officesBody}</p>
             </div>
             <div className="inline-flex w-fit items-center gap-3 rounded-lg border border-white/10 bg-[#111111] px-5 py-4 text-xs font-bold uppercase tracking-[0.32em] text-white/70 shadow-[0_20px_80px_rgba(0,0,0,0.35)]">
               <span className="h-3 w-3 rounded-full bg-emerald-400 shadow-[0_0_18px_rgba(52,211,153,0.95)]" />
-              Follow-the-sun - 24/7 support
+              {t.followSun}
             </div>
           </div>
 
@@ -265,12 +300,12 @@ export function InteractiveScrollingStory() {
                   </div>
                   <span className="inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.25em] text-white/70">
                     <span className={`h-1.5 w-1.5 rounded-full ${office.tone}`} />
-                    {office.status}
+                    {officeLabels[office.status as keyof typeof officeLabels] ?? office.status}
                   </span>
                 </div>
-                <p className="mt-7 text-[10px] font-bold uppercase tracking-[0.42em] text-white/32">{office.label}</p>
+                <p className="mt-7 text-[10px] font-bold uppercase tracking-[0.42em] text-white/32">{officeLabels[office.label as keyof typeof officeLabels] ?? office.label}</p>
                 <h3 className="mt-3 text-3xl font-bold tracking-tight">{office.city}</h3>
-                <p className="mt-3 text-base font-semibold text-white/55">{office.country}</p>
+                <p className="mt-3 text-base font-semibold text-white/55">{names[office.country] ?? office.country}</p>
                 <div className="mt-7 border-t border-white/10 pt-6 font-mono text-sm text-white/45">
                   <p className="flex items-center gap-3">
                     <Clock3 className="h-4 w-4" />
@@ -288,11 +323,11 @@ export function InteractiveScrollingStory() {
           <div className="mt-10 rounded-lg border border-white/10 bg-[#101010] p-8">
             <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.42em] text-white/35">- 24-hour coverage, visualized</p>
-                <p className="mt-2 text-sm text-white/45">{currentSupportStatus} {currentSupportOffice.city}, {currentSupportOffice.country}.</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.42em] text-white/35">{t.coverageLabel}</p>
+                <p className="mt-2 text-sm text-white/45">{currentSupportStatus} {currentSupportOffice.city}, {names[currentSupportOffice.country] ?? currentSupportOffice.country}.</p>
               </div>
               <div className="rounded-full border border-white/10 bg-[#050505]/35 px-4 py-2 font-mono text-xs text-white/60">
-                {localClock ? `${formatLocalTime(localClock.date)} - ${localClock.timeZone}` : "Reading local time..."}
+                {localClock ? `${formatLocalTime(localClock.date)} - ${localClock.timeZone}` : t.readingLocalTime}
               </div>
             </div>
             <div className="mt-8 rounded-lg border border-white/10 bg-[#111111] p-4">
@@ -332,7 +367,7 @@ export function InteractiveScrollingStory() {
                         </div>
                         {isCurrentOffice && (
                           <span className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-full bg-[#F3F2EE] px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-black">
-                            {activeSegment ? "Active" : "On-call"}
+                            {activeSegment ? t.active : t.onCall}
                           </span>
                         )}
                       </div>
@@ -342,11 +377,11 @@ export function InteractiveScrollingStory() {
               </div>
             </div>
             <div className="mt-8 rounded-lg border border-white/10 bg-[#050505]/25 p-4">
-              <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/35">Current support country</p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/35">{t.supportCountry}</p>
               <div className="mt-3 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
-                <p className="text-2xl font-bold tracking-tight">{currentSupportOffice.country}</p>
+                <p className="text-2xl font-bold tracking-tight">{names[currentSupportOffice.country] ?? currentSupportOffice.country}</p>
                 <p className="font-mono text-sm text-white/45">
-                  {currentSupportOffice.city} local time: {localClock ? getOfficeLocalTime(localClock.date, currentSupportOffice.timeZone) : "--:--"}
+                  {currentSupportOffice.city} {t.localTime}: {localClock ? getOfficeLocalTime(localClock.date, currentSupportOffice.timeZone) : "--:--"}
                 </p>
               </div>
             </div>
@@ -358,8 +393,8 @@ export function InteractiveScrollingStory() {
           </div>
         </div>
       </div>
-      <StandardFooterLinks />
-      <footer className="border-t border-black/10 bg-[#fff100] py-8 text-center text-sm text-black/80">© 2026 SaaSolution SL. A Paradox FZCO company. All rights reserved.</footer>
+      <StandardFooterLinks locale={locale} />
+      <footer className="border-t border-black/10 bg-[#fff100] py-8 text-center text-sm text-black/80">{c.footer}</footer>
     </section>
   );
 }

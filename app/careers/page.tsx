@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { ArrowRight, BriefcaseBusiness, Code2, Globe2, ShieldCheck, Sparkles, UsersRound } from "lucide-react";
 import { StandardFooterLinks } from "@/components/ui/standard-footer-links";
+import { LanguageSwitcher } from "@/components/ui/language-switcher";
+import { careersContent, common, countryNames } from "@/lib/i18n";
+import { getLocale } from "@/lib/i18n-server";
 
 type Capability = { title: string; body: string; icon: React.ComponentType<{ className?: string }> };
 type LocationGroup = { city: string; country: string; label: string; schedule: string; roles: Role[] };
@@ -138,7 +141,27 @@ function applicationHref(role: Role, city: string) {
   return `mailto:SLsaasolution@gmail.com?subject=${subject}&body=${body}`;
 }
 
-export default function CareersPage() {
+export default async function CareersPage() {
+  const locale = await getLocale();
+  const t = careersContent[locale];
+  const c = common[locale];
+  const names = countryNames[locale];
+  const localizedCapabilities = capabilities.map((capability, index) => {
+    const [title, body] = t.capabilityItems[index] ?? [capability.title, capability.body];
+    return { ...capability, title, body };
+  });
+  const localizedTotals = totals.map((item, index) => ({ ...item, label: t.totals[index] ?? item.label }));
+  const roleCopy = {
+    "Full-Stack Developer": t.roles.fullStack,
+    "Engineering Lead": t.roles.lead,
+    "HR & Operations Admin": t.roles.hr
+  };
+  const locationCopy = {
+    Ceuta: t.locations.ceuta,
+    Asuncion: t.locations.asuncion,
+    "Cebu City": t.locations.cebu
+  };
+
   return (
     <main className="min-h-screen bg-[#100F1F] text-[#F5F1FF]">
       <section className="relative overflow-hidden px-6 py-8 md:px-16 md:py-10">
@@ -149,25 +172,28 @@ export default function CareersPage() {
             <Link className="text-sm font-bold tracking-tight text-[#F5F1FF] transition hover:text-[#A78BFA] focus:outline-none focus:ring-2 focus:ring-[#A78BFA]" href="/">
               SaaSolution SL
             </Link>
-            <a className="inline-flex items-center gap-2 rounded-full border border-[#2DD4BF]/40 bg-[#2DD4BF]/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-[#5EEAD4] transition hover:bg-[#2DD4BF] hover:text-[#100F1F] focus:outline-none focus:ring-2 focus:ring-[#2DD4BF]" href="mailto:SLsaasolution@gmail.com">
-              Open application
-              <ArrowRight className="h-4 w-4" />
-            </a>
+            <div className="flex items-center gap-3">
+              <LanguageSwitcher locale={locale} tone="dark" />
+              <a className="inline-flex items-center gap-2 rounded-full border border-[#2DD4BF]/40 bg-[#2DD4BF]/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-[#5EEAD4] transition hover:bg-[#2DD4BF] hover:text-[#100F1F] focus:outline-none focus:ring-2 focus:ring-[#2DD4BF]" href="mailto:SLsaasolution@gmail.com">
+                {t.openApplication}
+                <ArrowRight className="h-4 w-4" />
+              </a>
+            </div>
           </nav>
 
           <header className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.42em] text-[#22D3EE]">- Capabilities</p>
-              <h1 className="mt-7 max-w-3xl text-5xl font-bold leading-[0.98] tracking-tight md:text-7xl">A full-stack studio.</h1>
-              <p className="mt-6 text-2xl font-semibold leading-tight text-[#F5F1FF]/52 md:text-3xl">One team. Every discipline.</p>
+              <p className="text-xs font-bold uppercase tracking-[0.42em] text-[#22D3EE]">{t.capabilitiesLabel}</p>
+              <h1 className="mt-7 max-w-3xl text-5xl font-bold leading-[0.98] tracking-tight md:text-7xl">{t.heroTitle}</h1>
+              <p className="mt-6 text-2xl font-semibold leading-tight text-[#F5F1FF]/52 md:text-3xl">{t.heroKicker}</p>
             </div>
             <p className="max-w-xl text-lg font-semibold leading-8 text-[#F5F1FF]/70">
-              We don&apos;t hand off between silos. Designers, engineers, and strategists sit at the same table, so your product ships without compromise.
+              {t.heroBody}
             </p>
           </header>
 
           <section aria-label="Capabilities" className="mt-16 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {capabilities.map((capability) => {
+            {localizedCapabilities.map((capability) => {
               const Icon = capability.icon;
               return (
                 <article className="rounded-2xl border border-[#F5F1FF]/12 bg-[#F5F1FF]/[0.055] p-8 shadow-[0_30px_100px_rgba(0,0,0,0.24)] backdrop-blur transition hover:-translate-y-1 hover:border-[#A78BFA]/55" key={capability.title}>
@@ -187,16 +213,16 @@ export default function CareersPage() {
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.36em] text-[#6D28D9]">- Vacancies</p>
-              <h2 className="mt-5 max-w-2xl text-4xl font-bold leading-tight tracking-tight md:text-6xl">Hiring across three locations.</h2>
+              <p className="text-xs font-bold uppercase tracking-[0.36em] text-[#6D28D9]">{t.vacanciesLabel}</p>
+              <h2 className="mt-5 max-w-2xl text-4xl font-bold leading-tight tracking-tight md:text-6xl">{t.vacanciesTitle}</h2>
             </div>
             <p className="max-w-2xl text-lg font-semibold leading-8 text-[#100F1F]/68">
-              We are building three focused product pods: Ceuta HQ, Asuncion, and Cebu City. Every location gets three full-stack developers and one lead. Ceuta HQ also hosts the HR and operations admin role.
+              {t.vacanciesBody}
             </p>
           </div>
 
           <div className="mt-10 grid gap-4 md:grid-cols-3">
-            {totals.map((item) => (
+            {localizedTotals.map((item) => (
               <div className="rounded-2xl border border-[#100F1F]/10 bg-[#F5F1FF]/70 p-6 shadow-sm" key={item.label}>
                 <p className="text-5xl font-bold tracking-tight">{item.value}</p>
                 <p className="mt-2 text-sm font-bold uppercase tracking-[0.22em] text-[#100F1F]/54">{item.label}</p>
@@ -209,32 +235,34 @@ export default function CareersPage() {
               <section className="rounded-[28px] border border-[#100F1F]/10 bg-[#100F1F] p-6 text-[#F5F1FF] shadow-[0_28px_90px_rgba(16,15,31,0.18)] md:p-8" key={location.city}>
                 <div className="flex flex-col gap-4 border-b border-[#F5F1FF]/10 pb-6 md:flex-row md:items-end md:justify-between">
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.36em] text-[#2DD4BF]">{location.label}</p>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.36em] text-[#2DD4BF]">{locationCopy[location.city as keyof typeof locationCopy]?.[0] ?? location.label}</p>
                     <h3 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">{location.city}</h3>
-                    <p className="mt-2 text-base font-semibold text-[#F5F1FF]/58">{location.country}</p>
+                    <p className="mt-2 text-base font-semibold text-[#F5F1FF]/58">{names[location.country] ?? location.country}</p>
                   </div>
                   <div className="inline-flex w-fit rounded-full border border-[#A78BFA]/35 bg-[#A78BFA]/12 px-4 py-2 text-xs font-bold uppercase tracking-[0.22em] text-[#C4B5FD]">
-                    {location.schedule}
+                    {locationCopy[location.city as keyof typeof locationCopy]?.[1] ?? location.schedule}
                   </div>
                 </div>
 
                 <div className="mt-6 grid gap-4 lg:grid-cols-3">
-                  {location.roles.map((role) => (
+                  {location.roles.map((role) => {
+                    const copy = roleCopy[role.title as keyof typeof roleCopy] ?? [role.title, role.type, role.summary];
+                    return (
                     <article className="rounded-2xl border border-[#F5F1FF]/12 bg-[#F5F1FF]/[0.06] p-6 transition hover:-translate-y-1 hover:border-[#2DD4BF]/55" key={`${location.city}-${role.title}`}>
                       <div className="flex items-start justify-between gap-4">
                         <div>
-                          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#F5F1FF]/42">{role.type}</p>
-                          <h4 className="mt-3 text-xl font-bold tracking-tight">{role.title}</h4>
+                          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#F5F1FF]/42">{copy[1]}</p>
+                          <h4 className="mt-3 text-xl font-bold tracking-tight">{copy[0]}</h4>
                         </div>
                         <span className="rounded-full bg-[#2DD4BF] px-3 py-1 text-sm font-bold text-[#100F1F]">x{role.count}</span>
                       </div>
-                      <p className="mt-5 min-h-24 text-sm font-semibold leading-6 text-[#F5F1FF]/62">{role.summary}</p>
+                      <p className="mt-5 min-h-24 text-sm font-semibold leading-6 text-[#F5F1FF]/62">{copy[2]}</p>
                       <Link className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#A78BFA] px-5 py-3 text-sm font-bold text-[#100F1F] transition hover:bg-[#2DD4BF] focus:outline-none focus:ring-2 focus:ring-[#2DD4BF] focus:ring-offset-2 focus:ring-offset-[#100F1F]" href={`/careers/${roleId(role, location.city)}`}>
-                        Check for more details
+                        {t.detailsCta}
                         <ArrowRight className="h-4 w-4" />
                       </Link>
                     </article>
-                  ))}
+                  );})}
                 </div>
               </section>
             ))}
@@ -242,8 +270,8 @@ export default function CareersPage() {
         </div>
       </section>
 
-      <StandardFooterLinks />
-      <footer className="border-t border-black/10 bg-[#fff100] py-8 text-center text-sm text-black/80">© 2026 SaaSolution SL. A Paradox FZCO company. All rights reserved.</footer>
+      <StandardFooterLinks locale={locale} />
+      <footer className="border-t border-black/10 bg-[#fff100] py-8 text-center text-sm text-black/80">{c.footer}</footer>
     </main>
   );
 }

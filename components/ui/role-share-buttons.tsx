@@ -2,16 +2,19 @@
 
 import { Mail, Share2 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
+import { shareContent, type Locale } from "@/lib/i18n";
 
 type RoleShareButtonsProps = {
   roleTitle: string;
   location: string;
+  locale: Locale;
 };
 
-export function RoleShareButtons({ roleTitle, location }: RoleShareButtonsProps) {
+export function RoleShareButtons({ roleTitle, location, locale }: RoleShareButtonsProps) {
   const [url, setUrl] = useState("");
+  const t = shareContent[locale];
   const title = `${roleTitle} - ${location} at SaaSolution SL`;
-  const text = `This SaaSolution SL role could be a strong fit: ${title}`;
+  const text = `${t.text} ${title}`;
 
   useEffect(() => {
     setUrl(window.location.href);
@@ -38,9 +41,9 @@ export function RoleShareButtons({ roleTitle, location }: RoleShareButtonsProps)
     <section aria-label="Share this role" className="rounded-2xl border border-[#F5F1FF]/12 bg-[#F5F1FF]/[0.055] p-6 backdrop-blur">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <p className="text-sm font-bold uppercase tracking-[0.24em] text-[#C4B5FD]">Share this vacancy</p>
+          <p className="text-sm font-bold uppercase tracking-[0.24em] text-[#C4B5FD]">{t.title}</p>
           <p className="mt-2 text-sm font-semibold leading-6 text-[#F5F1FF]/62">
-            Send this role to a candidate, partner, or someone in your network.
+            {t.body}
           </p>
         </div>
         <div className="flex flex-wrap gap-3">
@@ -56,7 +59,7 @@ export function RoleShareButtons({ roleTitle, location }: RoleShareButtonsProps)
           </a>
           <button className="inline-flex items-center gap-2 rounded-full border border-[#F5F1FF]/18 px-5 py-3 text-sm font-bold text-[#F5F1FF] transition hover:border-[#2DD4BF] hover:text-[#2DD4BF] focus:outline-none focus:ring-2 focus:ring-[#2DD4BF] disabled:cursor-not-allowed disabled:opacity-45" disabled={!url} onClick={shareNative} type="button">
             <Share2 className="h-4 w-4" />
-            Share
+            {t.share}
           </button>
         </div>
       </div>
