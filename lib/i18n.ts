@@ -403,6 +403,125 @@ export const aboutContent = {
   ctaButton: string;
 }>;
 
+const missionVisionEnglish = {
+  label: "- Mission & Vision",
+  navCta: "Contact us",
+  heroTitle: "One partner for the systems, risks, processes, and surprises that stand between you and progress.",
+  heroBody: "SaaSolution was built for clients who do not want a stack of vendors, tickets, meetings, and half-owned responsibilities. With 23 years of hardware, software, security, and process knowledge behind our work, we look at the full operating reality: the product, the people, the devices, the data, the threats, the workflow, and the business pressure around it.",
+  promiseTitle: "Our mission",
+  promiseBody: "Our mission is to be the practical technology partner that helps organizations solve problems from the inside and the outside at the same time. We understand how systems behave in the real world, where hardware fails, software slows teams down, security creates risk, and process debt quietly becomes expensive. We bring those layers together so clients can make clearer decisions and ship stronger solutions.",
+  visionTitle: "Our vision",
+  visionBody: "Our vision is a world where companies do not need to choose between speed, security, reliability, and imagination. We want SaaSolution to be the partner clients call when the problem is complex, unclear, urgent, or stuck between departments. The answer might be a platform, an automation, a security redesign, a process change, a hardware integration, or something nobody has named yet.",
+  founderTitle: "Built on 23 years of cross-domain experience",
+  founderBody: "That experience matters because real business trouble rarely lives in one box. A software issue may be a process issue. A security concern may be a people issue. A hardware limitation may be a product strategy issue. We think inside the box when standards, compliance, and proven engineering matter. We think outside the box when the obvious answer is too slow, too narrow, or too fragile.",
+  pillarsTitle: "How we become the only partner you need",
+  pillars: [
+    ["Hardware to cloud", "We can reason from physical devices and connected systems through APIs, dashboards, infrastructure, and support operations."],
+    ["Security by design", "We treat security as part of architecture and process, not as a final checklist after the product is already exposed."],
+    ["Process clarity", "We map how work really moves through teams, then remove friction with software, automation, and better operating habits."],
+    ["Product execution", "We design, build, deploy, and improve practical systems instead of leaving clients with ideas that never become production tools."],
+    ["Inside the box", "We respect constraints, budgets, compliance, legacy systems, and the daily reality your people already work inside."],
+    ["Outside the box", "We challenge assumptions when a better path needs a new workflow, a new interface, or a different way to combine technology."]
+  ],
+  closingTitle: "The result: fewer handoffs, fewer blind spots, more ownership.",
+  closingBody: "When SaaSolution works with a client, we do not only ask what needs to be built. We ask what needs to stop breaking, what needs to become simpler, what risk needs to disappear, and what future capability the organization should gain. That is why we aim to be the partner that can stay with you from first diagnosis to long-term operation.",
+  ctaButton: "Start the conversation"
+};
+
+export const missionVisionContent = {
+  es: missionVisionEnglish,
+  en: missionVisionEnglish,
+  nl: missionVisionEnglish,
+  de: missionVisionEnglish
+} satisfies Record<Locale, {
+  label: string;
+  navCta: string;
+  heroTitle: string;
+  heroBody: string;
+  promiseTitle: string;
+  promiseBody: string;
+  visionTitle: string;
+  visionBody: string;
+  founderTitle: string;
+  founderBody: string;
+  pillarsTitle: string;
+  pillars: string[][];
+  closingTitle: string;
+  closingBody: string;
+  ctaButton: string;
+}>;
+
+const contactEnglish = {
+  label: "- Contact",
+  navCta: "Email info",
+  heroTitle: "Tell us what is happening. We will help you turn it into a clear next move.",
+  heroBody: "Use the form for product questions, technical problems, security concerns, partnerships, hiring, or anything that needs a steady technical partner. The form opens an email draft to info@saasolution.com with your request.",
+  formTitle: "Send a request",
+  name: "Full name",
+  email: "Email",
+  company: "Company",
+  phone: "Phone",
+  topic: "Topic",
+  message: "Request",
+  attachment: "Attachment",
+  attachmentHint: "Select a file here, then attach it to the email draft before sending. Browser mailto forms cannot attach files automatically.",
+  placeholders: ["Jane Doe", "jane@company.com", "Company name", "+34 600 000 000", "What do you need help with?"],
+  topics: ["Product build", "Support request", "Security review", "Hardware integration", "Process improvement", "Partnership"],
+  consent: "By sending, you agree that SaaSolution may contact you about this request.",
+  send: "Open email draft",
+  infoTitle: "Direct contact",
+  phoneTitle: "Phone",
+  emailTitle: "Email",
+  officeTitle: "Offices",
+  mapTitle: "Office map",
+  mapBody: "Current map pins use temporary central office locations in Ceuta, Asuncion, and Cebu City.",
+  peopleTitle: "People you may hear from",
+  people: [
+    ["Othman El Haddouti", "Founder / Systems Partner", "Hardware, software, security, and process strategy."],
+    ["Maya Torres", "Client Operations", "First response, scheduling, and project intake."],
+    ["Jonas Vermeer", "Technical Lead", "Architecture, integrations, and delivery planning."]
+  ],
+  offices: [
+    ["Ceuta", "Spain", "+34 956 00 00 21", "Calle Real 24, 51001 Ceuta"],
+    ["Asuncion", "Paraguay", "+595 21 000 421", "Avenida Espana 1880, Asuncion"],
+    ["Cebu City", "Philippines", "+63 32 000 1842", "IT Park, Lahug, Cebu City"]
+  ]
+};
+
+export const contactContent = {
+  es: contactEnglish,
+  en: contactEnglish,
+  nl: contactEnglish,
+  de: contactEnglish
+} satisfies Record<Locale, {
+  label: string;
+  navCta: string;
+  heroTitle: string;
+  heroBody: string;
+  formTitle: string;
+  name: string;
+  email: string;
+  company: string;
+  phone: string;
+  topic: string;
+  message: string;
+  attachment: string;
+  attachmentHint: string;
+  placeholders: string[];
+  topics: string[];
+  consent: string;
+  send: string;
+  infoTitle: string;
+  phoneTitle: string;
+  emailTitle: string;
+  officeTitle: string;
+  mapTitle: string;
+  mapBody: string;
+  peopleTitle: string;
+  people: string[][];
+  offices: string[][];
+}>;
+
 export const partnersContent = {
   es: {
     startProject: "- Empezar un proyecto",
