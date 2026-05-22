@@ -192,7 +192,7 @@ export default async function CareersPage() {
             </p>
           </header>
 
-          <section aria-label="Capabilities" className="mt-16 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          <section aria-label={t.capabilitiesLabel.replace("- ", "")} className="mt-16 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {localizedCapabilities.map((capability) => {
               const Icon = capability.icon;
               return (

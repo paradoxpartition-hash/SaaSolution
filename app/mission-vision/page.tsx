@@ -3,8 +3,9 @@ import Link from "next/link";
 import { ArrowRight, Boxes, Cpu, Eye, Lightbulb, LockKeyhole, Network, ShieldCheck, Workflow } from "lucide-react";
 import { LanguageSwitcher } from "@/components/ui/language-switcher";
 import { StandardFooterLinks } from "@/components/ui/standard-footer-links";
-import { common, missionVisionContent } from "@/lib/i18n";
+import { common } from "@/lib/i18n";
 import { getLocale } from "@/lib/i18n-server";
+import { missionVisionLocalized } from "@/lib/page-content";
 
 export const metadata: Metadata = {
   title: "Mission & Vision | SaaSolution SL",
@@ -15,7 +16,7 @@ const pillarIcons = [Cpu, LockKeyhole, Workflow, Boxes, ShieldCheck, Lightbulb] 
 
 export default async function MissionVisionPage() {
   const locale = await getLocale();
-  const t = missionVisionContent[locale];
+  const t = missionVisionLocalized[locale];
   const c = common[locale];
 
   return (
@@ -48,7 +49,7 @@ export default async function MissionVisionPage() {
           </header>
 
           <div className="mt-16 grid gap-4 md:grid-cols-3">
-            {["Hardware", "Software", "Security"].map((item, index) => {
+            {(t.topCards as string[][]).map(([item, label], index) => {
               const icons = [Cpu, Network, ShieldCheck] as const;
               const Icon = icons[index];
 
@@ -56,7 +57,7 @@ export default async function MissionVisionPage() {
                 <div className="border border-[#F7F5EF]/12 bg-[#F7F5EF]/[0.065] p-6 backdrop-blur" key={item}>
                   <Icon className="h-7 w-7 text-[#FFF100]" />
                   <p className="mt-5 text-2xl font-bold">{item}</p>
-                  <p className="mt-2 text-sm font-bold uppercase tracking-[0.18em] text-[#F7F5EF]/48">Connected thinking</p>
+                  <p className="mt-2 text-sm font-bold uppercase tracking-[0.18em] text-[#F7F5EF]/48">{label}</p>
                 </div>
               );
             })}

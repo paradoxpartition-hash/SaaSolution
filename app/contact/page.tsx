@@ -3,8 +3,9 @@ import Link from "next/link";
 import { ArrowRight, Building2, Mail, MapPin, Paperclip, Phone, Send, UserRound } from "lucide-react";
 import { LanguageSwitcher } from "@/components/ui/language-switcher";
 import { StandardFooterLinks } from "@/components/ui/standard-footer-links";
-import { common, contactContent } from "@/lib/i18n";
+import { common, countryNames } from "@/lib/i18n";
 import { getLocale } from "@/lib/i18n-server";
+import { contactLocalized, contactPeopleLocalized } from "@/lib/page-content";
 
 export const metadata: Metadata = {
   title: "Contact SaaSolution SL",
@@ -21,8 +22,15 @@ const avatarTones = [
 
 export default async function ContactPage() {
   const locale = await getLocale();
-  const t = contactContent[locale];
+  const t = contactLocalized[locale];
   const c = common[locale];
+  const people = contactPeopleLocalized[locale];
+  const names = countryNames[locale];
+  const offices = [
+    ["Ceuta", "Spain", "+34 956 00 00 21", "Calle Real 24, 51001 Ceuta"],
+    ["Asuncion", "Paraguay", "+595 21 000 421", "Avenida Espana 1880, Asuncion"],
+    ["Cebu City", "Philippines", "+63 32 000 1842", "IT Park, Lahug, Cebu City"]
+  ];
 
   return (
     <main className="min-h-screen bg-[#F7F5EF] text-[#111318]">
@@ -66,7 +74,7 @@ export default async function ContactPage() {
               <fieldset>
                 <legend className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#111318]/52">{t.topic}</legend>
                 <div className="mt-4 flex flex-wrap gap-3">
-                  {t.topics.map((topic) => (
+                  {(t.topics as string[]).map((topic) => (
                     <label className="cursor-pointer rounded-full border border-[#111318]/12 bg-[#F7F5EF] px-4 py-3 text-sm font-bold text-[#111318]/76 transition hover:border-[#0F766E] hover:text-[#0F766E] has-[:checked]:border-[#0F766E] has-[:checked]:bg-[#0F766E] has-[:checked]:text-white" key={topic}>
                       <input className="sr-only" name="topic" type="radio" value={topic} />
                       {topic}
@@ -112,7 +120,7 @@ export default async function ContactPage() {
             <section className="border border-[#111318]/10 bg-[#111318] p-7 text-[#F7F5EF]">
               <h2 className="text-2xl font-bold tracking-tight">{t.peopleTitle}</h2>
               <div className="mt-6 grid gap-4">
-                {t.people.map(([name, role, body], index) => (
+                {people.map(([name, role, body], index) => (
                   <article className="flex gap-4 border border-[#F7F5EF]/12 bg-[#F7F5EF]/[0.06] p-4" key={name}>
                     <div className={`grid h-14 w-14 shrink-0 place-items-center rounded-full bg-gradient-to-br ${avatarTones[index] ?? avatarTones[0]}`}>
                       <UserRound className="h-7 w-7" />
@@ -138,13 +146,13 @@ export default async function ContactPage() {
             <p className="mt-6 text-lg font-semibold leading-8 text-[#111318]/64">{t.mapBody}</p>
 
             <div className="mt-8 grid gap-4">
-              {t.offices.map(([city, country, phone, address]) => (
+              {offices.map(([city, country, phone, address]) => (
                 <article className="border border-[#111318]/10 bg-white p-5" key={city}>
                   <div className="flex items-start gap-3">
                     <MapPin className="mt-1 h-5 w-5 shrink-0 text-[#0F766E]" />
                     <div>
                       <h3 className="text-lg font-bold">{city}</h3>
-                      <p className="text-sm font-semibold text-[#111318]/52">{country}</p>
+                      <p className="text-sm font-semibold text-[#111318]/52">{names[country] ?? country}</p>
                       <p className="mt-3 text-sm font-semibold text-[#111318]/70">{address}</p>
                       <a className="mt-2 inline-flex text-sm font-bold text-[#0F766E] transition hover:text-[#111318]" href={`tel:${phone.replace(/[^+\d]/g, "")}`}>{phone}</a>
                     </div>

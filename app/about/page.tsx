@@ -5,6 +5,7 @@ import { LanguageSwitcher } from "@/components/ui/language-switcher";
 import { StandardFooterLinks } from "@/components/ui/standard-footer-links";
 import { aboutContent, common } from "@/lib/i18n";
 import { getLocale } from "@/lib/i18n-server";
+import { aboutAsideContent } from "@/lib/page-content";
 
 export const metadata: Metadata = {
   title: "About SaaSolution SL",
@@ -22,6 +23,7 @@ export default async function AboutPage() {
   const locale = await getLocale();
   const t = aboutContent[locale];
   const c = common[locale];
+  const aside = aboutAsideContent[locale];
 
   return (
     <main className="min-h-screen bg-[#F7F5EF] text-[#111318]">
@@ -56,10 +58,10 @@ export default async function AboutPage() {
             <aside className="border-l border-[#F7F5EF]/14 pl-6">
               <Building2 className="h-10 w-10 text-[#FFF100]" />
               <p className="mt-6 text-2xl font-bold leading-tight text-[#F7F5EF]">
-                SaaS + solution, built as one operating system for product work.
+                {aside[0]}
               </p>
               <p className="mt-5 text-sm font-semibold leading-6 text-[#F7F5EF]/55">
-                Strategy, interface, engineering, automation, deployment, and support are treated as one responsibility.
+                {aside[1]}
               </p>
             </aside>
           </div>

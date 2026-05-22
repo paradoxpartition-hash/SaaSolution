@@ -84,7 +84,7 @@ export const homeContent = {
     showcaseTitle: "SaaSolution SL projectoverzicht",
     ecosystem: "Live productecosysteem",
     featuredSystem: "Uitgelicht systeem",
-    productLayer: "Product operating layer",
+    productLayer: "Operationele productlaag",
     chips: ["Workflow-AI", "Automatisering", "Dashboards"],
     projectTags: {
       Mithaq: "Digitaal islamitisch huwelijkscontract en testament",
@@ -92,7 +92,7 @@ export const homeContent = {
       Viyra: "Internationale workflowautomatisering",
       "First Line AI": "Supportautomatisering met AI-agenten",
       "Smart NFC Guest Pass": "Digitale gasttoegang",
-      "Delicious Fitness": "Social food en meal prep"
+      "Delicious Fitness": "Social food en maaltijdvoorbereiding"
     }
   },
   de: {
@@ -272,7 +272,7 @@ export const footerContent = {
     groups: [
       ["Bedrijf", ["Over ons", "Missie en visie", "Carrières / Vacatures", "Partners", "Contact"]],
       ["Producten", ["PriorityPlanR", "Mithaq", "First Line AI", "Delicious Fitness", "Smart NFC"]],
-      ["Resources", ["Blog", "Helpcenter", "Documentatie", "API", "Support"]],
+      ["Resources", ["Blog", "Helpcentrum", "Documentatie", "API", "Support"]],
       ["Juridisch", ["Privacybeleid", "Voorwaarden", "Cookiebeleid", "Verwerkersovereenkomst", "Beveiliging"]],
       ["Sociaal", ["LinkedIn", "Instagram", "YouTube", "X"]]
     ]
@@ -284,7 +284,7 @@ export const footerContent = {
     groups: [
       ["Unternehmen", ["Über uns", "Mission und Vision", "Karriere / Stellen", "Partner", "Kontakt"]],
       ["Produkte", ["PriorityPlanR", "Mithaq", "First Line AI", "Delicious Fitness", "Smart NFC"]],
-      ["Ressourcen", ["Blog", "Help Center", "Dokumentation", "API", "Support"]],
+      ["Ressourcen", ["Blog", "Hilfezentrum", "Dokumentation", "API", "Support"]],
       ["Rechtliches", ["Datenschutz", "AGB", "Cookie-Richtlinie", "Auftragsverarbeitung", "Sicherheit"]],
       ["Social", ["LinkedIn", "Instagram", "YouTube", "X"]]
     ]
@@ -587,7 +587,7 @@ export const partnersContent = {
     consent: "Door te verzenden ga je akkoord dat we contact opnemen over je aanvraag.",
     send: "Bericht sturen",
     projectTypes: ["Webplatform", "Mobiele app", "AI-agent", "Hardware + web", "Designsysteem", "Anders"],
-    steps: [["Discovery call", "30 min, gratis, geen pitch"], ["Voorstel", "Scope en prijs binnen 5 werkdagen"], ["Kickoff", "Wekelijkse demo's vanaf week een"]]
+    steps: [["Kennismakingsgesprek", "30 min, gratis, geen pitch"], ["Voorstel", "Omvang en prijs binnen 5 werkdagen"], ["Start", "Wekelijkse demo's vanaf week een"]]
   },
   de: {
     startProject: "- Projekt starten",
@@ -609,7 +609,7 @@ export const partnersContent = {
     consent: "Mit dem Absenden stimmst du zu, dass wir dich zu deiner Anfrage kontaktieren.",
     send: "Nachricht senden",
     projectTypes: ["Webplattform", "Mobile App", "KI-Agent", "Hardware + Web", "Designsystem", "Andere"],
-    steps: [["Discovery Call", "30 Min., kostenlos, kein Pitch"], ["Angebot", "Scope und Preis in 5 Arbeitstagen"], ["Kickoff", "Wöchentliche Demos ab Woche eins"]]
+    steps: [["Kennenlerngespraech", "30 Min., kostenlos, kein Pitch"], ["Angebot", "Umfang und Preis in 5 Arbeitstagen"], ["Start", "Woechentliche Demos ab Woche eins"]]
   }
 } satisfies Record<Locale, Record<string, string | string[] | string[][]>>;
 
@@ -694,9 +694,9 @@ export const careersContent = {
       ["Growth engineering", "A/B-experimenten, analytics en conversie-optimalisatie in elke release."]
     ],
     roles: {
-      fullStack: ["Full-Stack Developer", "Engineering", "Bouw features, integraties, dashboards en interne systemen voor het SaaSolutions portfolio."],
-      lead: ["Engineering Lead", "Leiderschap", "Eigenaarschap over ritme, codekwaliteit, technische richting en mentoring van de lokale pod."],
-      hr: ["HR & Operations Admin", "HQ Operations", "Beheer recruiting, onboarding, HR-documentatie en people operations vanuit Ceuta HQ."]
+      fullStack: ["Full-stack developer", "Engineering", "Bouw features, integraties, dashboards en interne systemen voor het SaaSolutions portfolio."],
+      lead: ["Engineering lead", "Leiderschap", "Eigenaarschap over ritme, codekwaliteit, technische richting en mentoring van de lokale pod."],
+      hr: ["HR- en operationsbeheerder", "HQ-operaties", "Beheer werving, onboarding, HR-documentatie en people operations vanuit Ceuta HQ."]
     },
     locations: {
       ceuta: ["Wereldwijde hoofdzetel", "Hybride / Europese uren"],
@@ -724,9 +724,9 @@ export const careersContent = {
       ["Growth Engineering", "A/B-Experimente, Analytics und Conversion-Optimierung in jedem Release."]
     ],
     roles: {
-      fullStack: ["Full-Stack Developer", "Engineering", "Baue Features, Integrationen, Dashboards und interne Systeme im SaaSolutions Portfolio."],
-      lead: ["Engineering Lead", "Leadership", "Verantworte Lieferrhythmus, Codequalität, technische Richtung und Mentoring des lokalen Pods."],
-      hr: ["HR & Operations Admin", "HQ Operations", "Koordiniere Recruiting, Onboarding, HR-Unterlagen und People Operations aus Ceuta HQ."]
+      fullStack: ["Full-Stack-Entwickler", "Engineering", "Baue Features, Integrationen, Dashboards und interne Systeme im SaaSolutions Portfolio."],
+      lead: ["Engineering Lead", "Leitung", "Verantworte Lieferrhythmus, Codequalität, technische Richtung und Mentoring des lokalen Pods."],
+      hr: ["HR- und Operations-Admin", "HQ-Operations", "Koordiniere Recruiting, Onboarding, HR-Unterlagen und People Operations aus Ceuta HQ."]
     },
     locations: {
       ceuta: ["Globale Zentrale", "Hybrid / Europa-Zeiten"],
