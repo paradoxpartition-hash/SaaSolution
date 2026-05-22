@@ -291,6 +291,118 @@ export const footerContent = {
   }
 } satisfies Record<Locale, { headline: string; body: string; aria: string; groups: [string, string[]][] }>;
 
+export const aboutContent = {
+  es: {
+    label: "- Sobre SaaSolution SL",
+    navCta: "Hablar con nosotros",
+    heroTitle: "SaaSolution existe para convertir ideas utiles en software que la gente usa de verdad.",
+    heroBody: "SaaSolution SL es un estudio de producto que disena, construye y opera plataformas SaaS, automatizaciones con IA y sistemas digitales para mercados internacionales. El nombre une lo que hacemos y como pensamos: software como servicio, convertido en una solucion completa para empresas, gobiernos, operadores y fundadores que necesitan avanzar rapido sin perder calidad.",
+    meaningTitle: "Que significa SaaSolution",
+    meaningBody: "SaaSolution significa que una buena herramienta no termina en el codigo. Incluye estrategia, diseno, infraestructura, datos, automatizacion, soporte y mejora continua. Construimos productos que resuelven problemas reales, se pueden operar en produccion y pueden crecer a traves de paises, equipos y casos de uso.",
+    originTitle: "Por que fue creada",
+    originBody: "SaaSolution fue creada para cerrar la distancia entre una idea ambiciosa y un producto listo para el mercado. Muchas organizaciones tienen oportunidades claras, pero se frenan por equipos aislados, proveedores lentos, prototipos que nunca llegan a produccion o tecnologia que no se adapta a la operacion diaria. Nacimos para reunir estrategia, ingenieria y ejecucion en un solo equipo responsable.",
+    beliefsTitle: "Lo que defendemos",
+    beliefs: [
+      ["Claridad antes que ruido", "Empezamos entendiendo el problema, el usuario y el resultado de negocio antes de escribir una linea de codigo."],
+      ["Producto sobre presentacion", "Preferimos demos reales, sistemas vivos y mejoras medibles a documentos que no cambian la realidad del usuario."],
+      ["Automatizacion con criterio", "Usamos IA y automatizacion donde reducen friccion, aceleran decisiones y hacen que los equipos trabajen mejor."],
+      ["Alcance internacional", "Disenamos para multiples mercados, idiomas, zonas horarias y modelos operativos desde el inicio."]
+    ],
+    creationTitle: "La razon de fondo",
+    creationBody: "SaaSolution fue creada porque el software moderno debe ser mas que una pagina bonita o una app aislada. Debe conectar procesos, simplificar decisiones, abrir nuevos ingresos y dar a los equipos una forma mas inteligente de trabajar. Nuestra mision es construir esa capa practica de tecnologia para organizaciones que quieren moverse con ambicion y precision.",
+    stats: [["SaaS", "Productos preparados para operar y escalar"], ["AI", "Automatizaciones aplicadas a flujos reales"], ["Global", "Equipos y soporte pensados para mercados internacionales"]],
+    ctaTitle: "Construimos con socios que tienen una mision clara.",
+    ctaBody: "Si tienes una plataforma, operacion o idea que necesita convertirse en producto real, SaaSolution puede ayudarte a darle forma, lanzarla y hacerla crecer.",
+    ctaButton: "Empezar un proyecto"
+  },
+  en: {
+    label: "- About SaaSolution SL",
+    navCta: "Talk to us",
+    heroTitle: "SaaSolution exists to turn useful ideas into software people actually use.",
+    heroBody: "SaaSolution SL is a product studio that designs, builds, and operates SaaS platforms, AI automations, and digital systems for international markets. The name combines what we build and how we think: software as a service, shaped into a complete solution for companies, governments, operators, and founders that need to move fast without losing quality.",
+    meaningTitle: "What SaaSolution stands for",
+    meaningBody: "SaaSolution means a strong tool does not stop at code. It includes strategy, design, infrastructure, data, automation, support, and continuous improvement. We build products that solve real problems, can be operated in production, and can grow across countries, teams, and use cases.",
+    originTitle: "Why it was created",
+    originBody: "SaaSolution was created to close the distance between an ambitious idea and a market-ready product. Many organizations see clear opportunities, but get slowed down by isolated teams, slow vendors, prototypes that never reach production, or technology that does not fit daily operations. We were formed to bring strategy, engineering, and execution into one accountable team.",
+    beliefsTitle: "What we stand for",
+    beliefs: [
+      ["Clarity before noise", "We start by understanding the problem, the user, and the business outcome before writing a line of code."],
+      ["Product over presentation", "We prefer real demos, live systems, and measurable improvement over documents that do not change the user's reality."],
+      ["Automation with judgment", "We use AI and automation where they reduce friction, accelerate decisions, and help teams work better."],
+      ["International reach", "We design for multiple markets, languages, time zones, and operating models from the beginning."]
+    ],
+    creationTitle: "The deeper reason",
+    creationBody: "SaaSolution was created because modern software should be more than a beautiful page or an isolated app. It should connect processes, simplify decisions, open new revenue, and give teams a smarter way to work. Our mission is to build that practical technology layer for organizations that want to move with ambition and precision.",
+    stats: [["SaaS", "Products prepared to operate and scale"], ["AI", "Automation applied to real workflows"], ["Global", "Teams and support shaped for international markets"]],
+    ctaTitle: "We build with partners who have a clear mission.",
+    ctaBody: "If you have a platform, operation, or idea that needs to become a real product, SaaSolution can help shape it, launch it, and grow it.",
+    ctaButton: "Start a project"
+  },
+  nl: {
+    label: "- Over SaaSolution SL",
+    navCta: "Praat met ons",
+    heroTitle: "SaaSolution bestaat om nuttige ideeen om te zetten in software die mensen echt gebruiken.",
+    heroBody: "SaaSolution SL is een productstudio die SaaS-platformen, AI-automatisering en digitale systemen ontwerpt, bouwt en beheert voor internationale markten. De naam combineert wat we bouwen en hoe we denken: software as a service, uitgewerkt tot een complete oplossing voor bedrijven, overheden, operators en founders die snel willen bewegen zonder kwaliteit te verliezen.",
+    meaningTitle: "Waar SaaSolution voor staat",
+    meaningBody: "SaaSolution betekent dat een sterke tool niet stopt bij code. Het gaat ook om strategie, design, infrastructuur, data, automatisering, support en voortdurende verbetering. We bouwen producten die echte problemen oplossen, in productie beheerd kunnen worden en kunnen groeien over landen, teams en use cases heen.",
+    originTitle: "Waarom het is opgericht",
+    originBody: "SaaSolution is opgericht om de afstand tussen een ambitieuze idee en een marktklaar product te verkleinen. Veel organisaties zien duidelijke kansen, maar worden vertraagd door losse teams, trage leveranciers, prototypes die nooit productie bereiken of technologie die niet past bij de dagelijkse operatie. We brengen strategie, engineering en uitvoering samen in een verantwoordelijk team.",
+    beliefsTitle: "Waar we voor staan",
+    beliefs: [
+      ["Duidelijkheid voor ruis", "We beginnen met het probleem, de gebruiker en het bedrijfsresultaat voordat we code schrijven."],
+      ["Product boven presentatie", "We kiezen voor echte demos, levende systemen en meetbare verbetering boven documenten die niets veranderen."],
+      ["Automatisering met oordeel", "We gebruiken AI en automatisering waar ze frictie verminderen, beslissingen versnellen en teams beter laten werken."],
+      ["Internationaal bereik", "We ontwerpen vanaf het begin voor meerdere markten, talen, tijdzones en operationele modellen."]
+    ],
+    creationTitle: "De diepere reden",
+    creationBody: "SaaSolution is opgericht omdat moderne software meer moet zijn dan een mooie pagina of een losse app. Het moet processen verbinden, beslissingen eenvoudiger maken, nieuwe omzet openen en teams slimmer laten werken. Onze missie is die praktische technologielaag te bouwen voor organisaties die ambitieus en precies willen bewegen.",
+    stats: [["SaaS", "Producten klaar om te beheren en schalen"], ["AI", "Automatisering toegepast op echte workflows"], ["Global", "Teams en support voor internationale markten"]],
+    ctaTitle: "We bouwen met partners die een duidelijke missie hebben.",
+    ctaBody: "Heb je een platform, operatie of idee dat een echt product moet worden, dan kan SaaSolution helpen het vorm te geven, te lanceren en te laten groeien.",
+    ctaButton: "Start een project"
+  },
+  de: {
+    label: "- Uber SaaSolution SL",
+    navCta: "Mit uns sprechen",
+    heroTitle: "SaaSolution verwandelt nutzliche Ideen in Software, die Menschen wirklich verwenden.",
+    heroBody: "SaaSolution SL ist ein Produktstudio, das SaaS-Plattformen, KI-Automatisierung und digitale Systeme fur internationale Markte entwickelt und betreibt. Der Name verbindet, was wir bauen, mit unserer Denkweise: Software as a Service, geformt zu einer kompletten Losung fur Unternehmen, Regierungen, Betreiber und Founder, die schnell vorankommen wollen, ohne Qualitat zu verlieren.",
+    meaningTitle: "Wofur SaaSolution steht",
+    meaningBody: "SaaSolution bedeutet, dass ein starkes Werkzeug nicht beim Code endet. Es umfasst Strategie, Design, Infrastruktur, Daten, Automatisierung, Support und kontinuierliche Verbesserung. Wir bauen Produkte, die echte Probleme losen, in Produktion betrieben werden konnen und uber Lander, Teams und Anwendungsfalle wachsen.",
+    originTitle: "Warum es gegrundet wurde",
+    originBody: "SaaSolution wurde gegrundet, um die Distanz zwischen einer ambitionierten Idee und einem marktreifen Produkt zu schliessen. Viele Organisationen sehen klare Chancen, werden aber durch isolierte Teams, langsame Anbieter, Prototypen ohne Produktionsreife oder Technologie gebremst, die nicht zur taglichen Arbeit passt. Wir verbinden Strategie, Engineering und Umsetzung in einem verantwortlichen Team.",
+    beliefsTitle: "Wofur wir stehen",
+    beliefs: [
+      ["Klarheit vor Larm", "Wir verstehen zuerst Problem, Nutzer und Geschaftsziel, bevor wir eine Zeile Code schreiben."],
+      ["Produkt vor Prasentation", "Wir bevorzugen echte Demos, live Systeme und messbare Verbesserung statt Dokumente ohne Wirkung."],
+      ["Automatisierung mit Urteil", "Wir nutzen KI und Automatisierung dort, wo sie Reibung reduzieren, Entscheidungen beschleunigen und Teams besser machen."],
+      ["Internationale Reichweite", "Wir planen von Beginn an fur mehrere Markte, Sprachen, Zeitzonen und Betriebsmodelle."]
+    ],
+    creationTitle: "Der tiefere Grund",
+    creationBody: "SaaSolution wurde geschaffen, weil moderne Software mehr sein sollte als eine schone Seite oder eine isolierte App. Sie sollte Prozesse verbinden, Entscheidungen vereinfachen, neue Umsatze ermoglichen und Teams intelligenter arbeiten lassen. Unsere Mission ist es, diese praktische Technologieschicht fur Organisationen zu bauen, die ambitioniert und prazise handeln wollen.",
+    stats: [["SaaS", "Produkte bereit fur Betrieb und Skalierung"], ["AI", "Automatisierung fur echte Workflows"], ["Global", "Teams und Support fur internationale Markte"]],
+    ctaTitle: "Wir bauen mit Partnern, die eine klare Mission haben.",
+    ctaBody: "Wenn du eine Plattform, Operation oder Idee hast, die zu einem echten Produkt werden soll, kann SaaSolution sie formen, launchen und wachsen lassen.",
+    ctaButton: "Projekt starten"
+  }
+} satisfies Record<Locale, {
+  label: string;
+  navCta: string;
+  heroTitle: string;
+  heroBody: string;
+  meaningTitle: string;
+  meaningBody: string;
+  originTitle: string;
+  originBody: string;
+  beliefsTitle: string;
+  beliefs: string[][];
+  creationTitle: string;
+  creationBody: string;
+  stats: string[][];
+  ctaTitle: string;
+  ctaBody: string;
+  ctaButton: string;
+}>;
+
 export const partnersContent = {
   es: {
     startProject: "- Empezar un proyecto",
