@@ -1,18 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
-import { isLocale, type Locale } from "@/lib/i18n";
 
-const supported = ["es", "en", "nl", "de"] as const;
+const supported = ["es", "en", "ar", "pt", "fr", "de"] as const;
+type MiddlewareLocale = (typeof supported)[number];
 
-function localeFromCountry(country: string | null): Locale | null {
+function isLocale(value: string | null | undefined): value is MiddlewareLocale {
+  return !!value && (supported as readonly string[]).includes(value);
+}
+
+function localeFromCountry(country: string | null): MiddlewareLocale | null {
   const code = country?.toUpperCase();
   if (!code) return null;
   if (["ES", "MX", "AR", "CO", "CL", "PE", "VE", "UY", "PY", "BO", "EC", "GT", "CR", "PA", "DO", "HN", "NI", "SV"].includes(code)) return "es";
-  if (["NL", "BE"].includes(code)) return "nl";
+  if (["AE", "SA", "QA", "KW", "BH", "OM"].includes(code)) return "ar";
+  if (["BR", "PT", "AO", "MZ"].includes(code)) return "pt";
+  if (["FR", "MA", "TN", "DZ", "SN", "CI"].includes(code)) return "fr";
   if (["DE", "AT", "CH", "LI", "LU"].includes(code)) return "de";
   return null;
 }
 
-function localeFromAcceptLanguage(header: string | null): Locale | null {
+function localeFromAcceptLanguage(header: string | null): MiddlewareLocale | null {
   if (!header) return null;
   const ranked = header
     .split(",")
@@ -24,13 +30,13 @@ function localeFromAcceptLanguage(header: string | null): Locale | null {
 
   for (const item of ranked) {
     const language = item.tag.split("-")[0];
-    if ((supported as readonly string[]).includes(language)) return language as Locale;
+    if ((supported as readonly string[]).includes(language)) return language as MiddlewareLocale;
   }
 
   return null;
 }
 
-function localeFromDomain(host: string): Locale {
+function localeFromDomain(host: string): MiddlewareLocale {
   const normalized = host.toLowerCase().split(":")[0];
   if (normalized.endsWith(".es")) return "es";
   return "en";

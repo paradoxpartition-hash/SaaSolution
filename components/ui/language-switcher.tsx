@@ -13,8 +13,7 @@ export function LanguageSwitcher({ locale, tone = "light" }: { locale: Locale; t
   const active = tone === "dark" ? "bg-white text-black border-white" : "bg-black text-white border-black";
 
   function switchLanguage(nextLocale: Locale) {
-    document.cookie = `saas-locale=${nextLocale}; path=/; max-age=31536000; SameSite=Lax`;
-    router.refresh();
+    router.push(`?lang=${nextLocale}`);
   }
 
   return (

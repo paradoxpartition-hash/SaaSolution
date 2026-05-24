@@ -36,7 +36,7 @@ export const products: Product[] = [
   { name: "Mithaq", image: "/projects/mithaq.png" },
   { name: "PriorityPlanR", image: "/projects/placeholders/priorityplanr.svg" },
   { name: "Viyra", image: "/projects/viyra.png" },
-  { name: "First Line AI", image: "/projects/firstline-ai.png" },
+  { name: "NFTicket", image: "/projects/firstline-ai.png" },
   { name: "Smart NFC Guest Pass", image: "/projects/smart-nfc.png" },
   { name: "Delicious Fitness", image: "/projects/deliciousfitness.png" }
 ];

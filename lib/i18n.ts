@@ -64,17 +64,18 @@ export const homeContent = {
     }
   },
   en: {
-    heroSubtitle: "Software that moves the needle.",
-    showcaseTitle: "SaaSolution SL Project Showcase",
-    ecosystem: "Live Product Ecosystem",
-    featuredSystem: "Featured System",
-    productLayer: "Product Operating Layer",
-    chips: ["Workflow AI", "Automation", "Dashboards"],
+    heroSubtitle: "AI software, automation and enterprise SaaS from Ceuta for international markets.",
+    showcaseTitle: "SaaSolutions SL platform map",
+    ecosystem: "International AI-first ecosystem",
+    featuredSystem: "Featured operating layer",
+    productLayer: "Enterprise SaaS, automation and smart systems",
+    chips: ["Applied AI", "Digital government", "Smart buildings"],
     projectTags: {
       Mithaq: "Digital Islamic Prenup & Will",
       PriorityPlanR: "Smart Planning & Scheduling",
       Viyra: "International workflow automation",
-      "First Line AI": "AI Agent Support Automation",
+      "First Line AI": "AI agent support automation",
+      NFTicket: "Digital ticketing and access control",
       "Smart NFC Guest Pass": "Digital Guest Access",
       "Delicious Fitness": "Social Food & Meal Prep"
     }
@@ -160,24 +161,24 @@ export const storyContent = {
     active: "Active",
     onCall: "On-call",
     presenceLabel: "- Global Presence",
-    officesTitle: "Three offices.",
-    officesBody: "Support follows the office whose local workday is active now.",
+    officesTitle: "Ceuta headquarters. International operating rhythm.",
+    officesBody: "SaaSolutions is headquartered in Ceuta, Spain, with operational presence connected to Paraguay, the Philippines and wider international markets.",
     followSun: "Follow-the-sun - 24/7 support",
     coverageLabel: "- 24-hour coverage, visualized",
     supportCountry: "Current support country",
     localTime: "local time",
     slides: [
-      ["About SaaSolutions", "We are SaaSolutions — a studio of engineers and designers shipping cinematic products for ambitious companies. From commerce to AI agents to connected hardware, we build the things your customers can't stop talking about."],
-      ["AI-First Platforms", "We create software that combines automation, modern cloud architecture and AI-driven workflows."],
-      ["How we turn a brief\ninto a breakout.", "The SaaSolutions Method"],
-      ["Six products.\nOne obsession with craft.", "Every line of code, every pixel, every interaction — engineered to make your customers feel something. Here's what we're shipping right now."],
-      ["Partner With Us", "We are open to partnerships, pilots and international deployment opportunities with enterprises, governments, operators and technology partners."]
+      ["About SaaSolutions", "SaaSolutions SL is an AI-first software and automation company headquartered in Ceuta, Spain. We build premium SaaS platforms, AI workflows and operational systems for companies, governments and international operators."],
+      ["AI-First Platforms", "We create software that combines applied AI, secure cloud architecture, automation and elegant product design for Spain, Africa, South America, UAE/GCC and Southeast Asia."],
+      ["How we turn a brief\ninto a deployed platform.", "The SaaSolutions Method"],
+      ["Six products.\nOne obsession with craft.", "PriorityPlanR, Mithaq, Viyra, Delicious Fitness, NFTicket and Smart NFC Guest Pass are product tracks shaped around hospitality, buildings, legal workflows, operations, events and commerce."],
+      ["Partner With Us", "We are open to partnerships, pilots and enterprise deployments with hospitality groups, real estate operators, public-sector teams, GCC partners, African markets, South American companies and Southeast Asian delivery teams."]
     ],
     methodSteps: [
-      ["Discover", "We audit, interview, and pressure-test your brief. You walk out with a clarity document, not a slide deck."],
-      ["Design", "High-fidelity prototypes wired to real data. Every interaction defended with research."],
-      ["Build", "Weekly demos. Production deploys from week one. No 'big reveal' surprises."],
-      ["Scale", "We stay on as a partner - performance tuning, growth loops, and expansion into new markets."]
+      ["Discover", "We map the business model, users, compliance context, AI opportunities and regional requirements before a single sprint begins."],
+      ["Design", "We prototype the workflows, dashboards, data model and conversion paths so the product feels premium and operationally real."],
+      ["Build", "We ship production-grade SaaS, automation and integrations with clear demos, measurable progress and deployment discipline."],
+      ["Scale", "We stay close after launch: performance, security, localization, analytics and expansion into new markets."]
     ]
   },
   nl: {
@@ -254,12 +255,12 @@ export const footerContent = {
     ]
   },
   en: {
-    headline: "Practical software for international markets.",
-    body: "SaaSolutions builds and operates practical software products for businesses, governments, and international markets.",
+    headline: "AI-first software for international markets.",
+    body: "SaaSolutions builds enterprise SaaS, automation platforms, hospitality systems and government-grade digital products from Ceuta, Spain.",
     aria: "Footer links",
     groups: [
       ["Company", ["About", "Mission & Vision", "Careers / Vacancies", "Partners", "Contact"]],
-      ["Products", ["PriorityPlanR", "Mithaq", "First Line AI", "Delicious Fitness", "Smart NFC"]],
+      ["Products", ["PriorityPlanR", "Mithaq", "Viyra", "Delicious Fitness", "NFTicket"]],
       ["Resources", ["Blog", "Help Center", "Documentation", "API", "Support"]],
       ["Legal", ["Privacy Policy", "Terms & Conditions", "Cookie Policy", "Data Processing Agreement", "Security"]],
       ["Social", ["LinkedIn", "Instagram", "YouTube", "X"]]

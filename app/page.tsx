@@ -1,25 +1,38 @@
+import type { Metadata } from "next";
+import Link from "next/link";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { InteractiveScrollingStory } from "@/components/ui/interactive-scrolling-story-component";
 import { LanguageSwitcher } from "@/components/ui/language-switcher";
 import { homeContent } from "@/lib/i18n";
 import { getLocale } from "@/lib/i18n-server";
+import { createMetadata, faq, organizationSchema, products, services, websiteSchema } from "@/lib/site";
+
+export const metadata: Metadata = createMetadata({
+  title: "SaaSolutions SL | AI-first software and automation company in Spain",
+  description:
+    "SaaSolutions SL builds enterprise SaaS, AI automation, hospitality automation, smart building systems and government digital platforms from Ceuta, Spain for international markets."
+});
 
 const projects = [
-  { name: "Mithaq", tone: "from-[#F3F2EE] to-[#F3F2EE]", tag: "Digital Islamic Prenup & Will" },
-  { name: "PriorityPlanR", tone: "from-[#F3F2EE] to-[#F3F2EE]", tag: "Smart Planning & Scheduling" },
-  { name: "Viyra", tone: "from-[#F3F2EE] to-[#F3F2EE]", tag: "International workflow automation" },
-  { name: "First Line AI", tone: "from-[#F3F2EE] to-[#F3F2EE]", tag: "AI Agent Support Automation" },
-  { name: "Smart NFC Guest Pass", tone: "from-[#F3F2EE] to-[#F3F2EE]", tag: "Digital Guest Access" },
-  { name: "Delicious Fitness", tone: "from-[#F3F2EE] to-[#F3F2EE]", tag: "Social Food & Meal Prep" }
+  { name: "Mithaq", tone: "from-[#F3F2EE] to-[#F3F2EE]", tag: "Digital Islamic prenup, will and legal workflow platform" },
+  { name: "PriorityPlanR", tone: "from-[#F3F2EE] to-[#F3F2EE]", tag: "AI planning, scheduling and operational prioritization" },
+  { name: "Viyra", tone: "from-[#F3F2EE] to-[#F3F2EE]", tag: "Premium real estate and international workflow automation" },
+  { name: "NFTicket", tone: "from-[#F3F2EE] to-[#F3F2EE]", tag: "Digital ticketing, access and high-trust event credentials" },
+  { name: "Smart NFC Guest Pass", tone: "from-[#F3F2EE] to-[#F3F2EE]", tag: "Hospitality and smart building guest access" },
+  { name: "Delicious Fitness", tone: "from-[#F3F2EE] to-[#F3F2EE]", tag: "Social food, meal prep and fitness commerce" }
 ] as const;
 
 export default async function Home() {
   const locale = await getLocale();
   const t = homeContent[locale];
-  const translatedProjects = projects.map((project) => ({ ...project, tag: t.projectTags[project.name] ?? project.tag }));
+  const translatedProjects = projects.map((project) => ({
+    ...project,
+    tag: (t.projectTags as Record<string, string>)[project.name] ?? project.tag
+  }));
 
   return (
     <main className="bg-[#F3F2EE] text-black">
+      <JsonLd data={[organizationSchema(), websiteSchema(), faqSchema(), serviceSchema(), softwareSchema()]} />
       <div className="fixed right-4 top-4 z-50">
         <LanguageSwitcher locale={locale} />
       </div>
@@ -43,7 +56,114 @@ export default async function Home() {
         </ContainerScroll>
       </section>
 
+      <section className="sr-only" aria-label="SaaSolutions SEO summary">
+        <h2>International AI software company</h2>
+        <p>
+          SaaSolutions SL is an AI-first software and automation company headquartered in Ceuta, Spain, serving Spain, the Mediterranean, Africa, South America, UAE/GCC, Southeast Asia and Europe.
+        </p>
+        <p>
+          SaaSolutions builds enterprise SaaS, AI automation, hospitality automation, smart building systems, government digital platforms, AI concierge systems and custom SaaS development.
+        </p>
+      </section>
+
       <InteractiveScrollingStory locale={locale} />
     </main>
   );
+}
+
+function JsonLd({ data }: { data: unknown }) {
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />;
+}
+
+export function SiteFooter() {
+  const groups = [
+    ["Company", [["About", "/about"], ["Mission & Vision", "/mission-vision"], ["Contact", "/contact"]]],
+    ["Products", products.slice(0, 4).map((product) => [product.name, `/products/${product.slug}`])],
+    ["Services", services.slice(0, 4).map((service) => [service.title, `/services/${service.slug}`])],
+    ["Regions", [["Spain", "/regions/spain"], ["Africa", "/regions/africa"], ["UAE", "/regions/uae"], ["Philippines", "/regions/philippines"]]],
+    ["Legal", [["Privacy", "/privacy"], ["Terms & Conditions", "/terms"], ["Security", "/security"]]]
+  ] as const;
+
+  return (
+    <footer className="border-t border-black/10 bg-[#6B7280] px-6 py-12 text-white md:px-16">
+      <div className="mx-auto max-w-7xl">
+        <div className="grid gap-10 lg:grid-cols-[1.2fr_2fr]">
+          <div>
+            <p className="text-sm font-bold">SaaSolutions SL</p>
+            <p className="mt-4 max-w-md text-sm leading-6 text-white/62">
+              International AI-first software, automation and SaaS development from Ceuta, Spain.
+            </p>
+          </div>
+          <nav className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5" aria-label="Footer">
+            {groups.map(([title, links]) => (
+              <div key={title}>
+                <h3 className="text-xs font-bold uppercase tracking-[0.22em] text-white/42">{title}</h3>
+                <ul className="mt-4 space-y-2.5">
+                  {links.map(([label, href]) => (
+                    <li key={href}>
+                      <Link className="text-sm font-medium text-white/85 transition hover:text-[#FFF100] focus:outline-none focus:ring-2 focus:ring-[#FFF100]" href={href}>
+                        {label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </nav>
+        </div>
+        <p className="mt-10 border-t border-white/10 pt-6 text-xs leading-6 text-white/50">
+          Developed by SaaSolutions SL. Intellectual property owned by Paradox FZCO. © 2026 Paradox FZCO. All rights reserved.
+        </p>
+      </div>
+    </footer>
+  );
+}
+
+function faqSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faq.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer }
+    }))
+  };
+}
+
+function serviceSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: services.map((service, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "Service",
+        name: service.title,
+        description: service.description,
+        provider: { "@type": "Organization", name: "SaaSolutions SL" },
+        areaServed: ["Spain", "Africa", "South America", "UAE/GCC", "Southeast Asia", "Europe"]
+      }
+    }))
+  };
+}
+
+function softwareSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: products.map((product, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "SoftwareApplication",
+        name: product.name,
+        applicationCategory: product.industry,
+        operatingSystem: "Web",
+        description: product.description,
+        creator: { "@type": "Organization", name: "SaaSolutions SL" }
+      }
+    }))
+  };
 }

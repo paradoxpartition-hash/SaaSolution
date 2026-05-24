@@ -153,7 +153,7 @@ export default async function HelpCenterPage() {
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <Link className="inline-flex items-center gap-3 rounded-full bg-[#111318] px-6 py-4 text-sm font-bold text-white transition hover:bg-[#0F766E] focus:outline-none focus:ring-2 focus:ring-[#0F766E] focus:ring-offset-2" href="https://support.saasolution.com">
+            <Link className="inline-flex items-center gap-3 rounded-full bg-[#111318] px-6 py-4 text-sm font-bold text-white transition hover:bg-[#0F766E] focus:outline-none focus:ring-2 focus:ring-[#0F766E] focus:ring-offset-2" href="https://saasupport.com">
               <LifeBuoy className="h-5 w-5" />
               {t.supportLabel as string}
             </Link>

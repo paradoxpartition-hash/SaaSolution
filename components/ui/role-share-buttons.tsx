@@ -1,7 +1,7 @@
 "use client";
 
 import { Mail, Share2 } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { shareContent, type Locale } from "@/lib/i18n";
 
 type RoleShareButtonsProps = {
@@ -11,14 +11,10 @@ type RoleShareButtonsProps = {
 };
 
 export function RoleShareButtons({ roleTitle, location, locale }: RoleShareButtonsProps) {
-  const [url, setUrl] = useState("");
+  const [url] = useState(() => (typeof window === "undefined" ? "" : window.location.href));
   const t = shareContent[locale];
   const title = `${roleTitle} - ${location} at SaaSolution SL`;
   const text = `${t.text} ${title}`;
-
-  useEffect(() => {
-    setUrl(window.location.href);
-  }, []);
 
   const links = useMemo(() => {
     const encodedUrl = encodeURIComponent(url);
