@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { InteractiveScrollingStory } from "@/components/ui/interactive-scrolling-story-component";
 import { LanguageSwitcher } from "@/components/ui/language-switcher";
-import { homeContent, platformsContent } from "@/lib/i18n";
+import { homeContent } from "@/lib/i18n";
 import { getLocale } from "@/lib/i18n-server";
 import { createMetadata, faq, organizationSchema, products, services, websiteSchema } from "@/lib/site";
 
@@ -57,8 +57,6 @@ export default async function Home() {
         </ContainerScroll>
       </section>
 
-      <UpcomingPlatforms locale={locale} />
-
       <section className="sr-only" aria-label="SaaSolutions SEO summary">
         <h2>International AI software company</h2>
         <p>
@@ -76,46 +74,6 @@ export default async function Home() {
 
 function JsonLd({ data }: { data: unknown }) {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />;
-}
-
-function UpcomingPlatforms({ locale }: { locale: keyof typeof platformsContent }) {
-  const t = platformsContent[locale];
-
-  return (
-    <section id="products" aria-labelledby="upcoming-platforms-title" className="bg-[#F3F2EE] px-6 py-20 text-black md:px-16">
-      <div className="mx-auto max-w-7xl">
-        <p className="text-xs font-bold uppercase tracking-[0.42em] text-black/55">{t.label}</p>
-        <h2 id="upcoming-platforms-title" className="mt-5 max-w-3xl text-4xl font-bold tracking-tight md:text-5xl">
-          {t.title}
-        </h2>
-        <p className="mt-5 max-w-2xl text-base leading-7 text-black/65 md:text-lg">{t.intro}</p>
-
-        <div className="mt-12 grid gap-5 md:grid-cols-3">
-          {t.cards.map((card) => (
-            <article
-              key={card.slug}
-              className="flex flex-col rounded-2xl border border-black/15 bg-white/70 p-7 backdrop-blur-sm transition hover:-translate-y-1 hover:border-black/30 hover:shadow-[0_18px_50px_rgba(0,0,0,0.08)]"
-            >
-              <span className="inline-flex w-fit items-center gap-2 rounded-full border border-[#2563EB]/30 bg-[#2563EB]/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-[#1D4ED8]">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#2563EB]" />
-                {t.status}
-              </span>
-              <h3 className="mt-6 text-2xl font-bold tracking-tight">{card.name}</h3>
-              <p className="mt-1 text-xs font-bold uppercase tracking-[0.16em] text-[#1D4ED8]">{card.tagline}</p>
-              <p className="mt-4 flex-1 text-sm leading-6 text-black/65">{card.text}</p>
-              <Link
-                className="mt-6 inline-flex w-fit items-center gap-2 text-sm font-bold text-black transition hover:text-[#1D4ED8] focus:outline-none focus:ring-2 focus:ring-[#2563EB]"
-                href={`/products/${card.slug}`}
-              >
-                {t.cta}
-                <span aria-hidden>→</span>
-              </Link>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
 }
 
 export function SiteFooter() {
