@@ -18,32 +18,32 @@ export const languageMetadata: Record<SeoLanguage, { title: string; description:
   en: {
     title: "SaaSolutions SL | AI software, automation and enterprise SaaS from Spain",
     description:
-      "SaaSolutions SL is an AI-first software and automation company headquartered in Ceuta, Spain, building enterprise SaaS, government platforms, hospitality automation and smart building systems for international markets."
+      "SaaSolutions SL is a global, AI-first software and automation company headquartered in Ceuta, Spain, building international SaaS solutions, government platforms and smart building systems — including its upcoming hospitality platforms hospitalityOS, HospitalityOps and HospitalityTV, currently being prepared for launch."
   },
   es: {
     title: "SaaSolutions SL | Software IA, automatizacion y SaaS empresarial en Espana",
     description:
-      "SaaSolutions SL es una empresa AI-first de software y automatizacion con sede en Ceuta, Espana, enfocada en SaaS empresarial, plataformas publicas, hosteleria y edificios inteligentes."
+      "SaaSolutions SL es una empresa global AI-first de software y automatizacion con sede en Ceuta, Espana, que construye soluciones SaaS internacionales, plataformas publicas y edificios inteligentes, incluidas sus proximas plataformas de hosteleria hospitalityOS, HospitalityOps y HospitalityTV, en preparacion para su lanzamiento."
   },
   ar: {
     title: "SaaSolutions SL | برمجيات الذكاء الاصطناعي والأتمتة من إسبانيا",
     description:
-      "SaaSolutions SL شركة برمجيات وأتمتة تعتمد على الذكاء الاصطناعي من سبتة، إسبانيا، وتبني منصات SaaS للمؤسسات والحكومات والضيافة والمباني الذكية."
+      "SaaSolutions SL شركة عالمية للبرمجيات والأتمتة تعتمد على الذكاء الاصطناعي من سبتة، إسبانيا، تبني حلول SaaS دولية ومنصات حكومية ومبانٍ ذكية، بما في ذلك منصات الضيافة القادمة hospitalityOS وHospitalityOps وHospitalityTV التي يجري تجهيزها للإطلاق قريبًا."
   },
   pt: {
     title: "SaaSolutions SL | Software de IA, automacao e SaaS empresarial na Espanha",
     description:
-      "A SaaSolutions SL e uma empresa AI-first de software e automacao em Ceuta, Espanha, criando SaaS empresarial, plataformas governamentais e automacao para hospitalidade e edificios inteligentes."
+      "A SaaSolutions SL e uma empresa global AI-first de software e automacao em Ceuta, Espanha, criando solucoes SaaS internacionais, plataformas governamentais e edificios inteligentes, incluindo as suas proximas plataformas de hospitalidade hospitalityOS, HospitalityOps e HospitalityTV, em preparacao para o lancamento."
   },
   fr: {
     title: "SaaSolutions SL | Logiciels IA, automatisation et SaaS d'entreprise en Espagne",
     description:
-      "SaaSolutions SL est une societe logicielle AI-first basee a Ceuta, Espagne, qui construit des plateformes SaaS, gouvernementales, hotelieres et smart building."
+      "SaaSolutions SL est une societe logicielle AI-first mondiale basee a Ceuta, Espagne, qui construit des solutions SaaS internationales, des plateformes gouvernementales et smart building, dont ses prochaines plateformes hotelieres hospitalityOS, HospitalityOps et HospitalityTV, en cours de preparation pour leur lancement."
   },
   de: {
     title: "SaaSolutions SL | KI-Software, Automatisierung und Enterprise SaaS aus Spanien",
     description:
-      "SaaSolutions SL ist ein AI-first Software- und Automatisierungsunternehmen mit Sitz in Ceuta, Spanien, fur Enterprise SaaS, Regierungsplattformen, Hospitality Automation und Smart Buildings."
+      "SaaSolutions SL ist ein globales AI-first Software- und Automatisierungsunternehmen mit Sitz in Ceuta, Spanien, das internationale SaaS-Losungen, Regierungsplattformen und Smart Buildings baut — darunter die kommenden Hospitality-Plattformen hospitalityOS, HospitalityOps und HospitalityTV, die derzeit fur den Launch vorbereitet werden."
   }
 };
 
@@ -100,13 +100,31 @@ export const services = [
 
 export const products = [
   {
-    slug: "priorityplanr",
-    name: "PriorityPlanR",
-    image: "/projects/placeholders/priorityplanr.svg",
-    industry: "Operations, scheduling and field teams",
-    status: "Private product track",
+    slug: "hospitalityos",
+    name: "hospitalityOS",
+    image: "/projects/placeholders/hospitalityos.svg",
+    industry: "Hospitality websites and brand platforms",
+    status: "Going online soon",
     description:
-      "A planning and prioritization platform for teams that need dispatch, task sequencing, SLA visibility and executive-level operational control."
+      "A multilingual digital hospitality website and brand platform for modern accommodation providers, property managers and hospitality businesses. Part of the SaaSolution SL hospitality technology roadmap, currently being prepared for launch."
+  },
+  {
+    slug: "hospitalityops",
+    name: "HospitalityOps",
+    image: "/projects/placeholders/hospitalityops.svg",
+    industry: "Hospitality operations and field teams",
+    status: "Going online soon",
+    description:
+      "A mobile-first operations suite for housekeeping, maintenance, inspections, lost & found, inventory, task reassignment and field team coordination. Part of the upcoming SaaSolution SL hospitality ecosystem, going online soon."
+  },
+  {
+    slug: "hospitalitytv",
+    name: "HospitalityTV",
+    image: "/projects/placeholders/hospitalitytv.svg",
+    industry: "Smart TV guest experience",
+    status: "Going online soon",
+    description:
+      "A smart Android TV guest experience platform for apartments, hotels, serviced stays and short-term rentals, with in-room communication, digital concierge features, local information and service access. Currently being prepared for launch."
   },
   {
     slug: "mithaq",
@@ -134,15 +152,6 @@ export const products = [
     status: "Product placeholder",
     description:
       "A social food and meal-prep product concept for creators, fitness customers and operators who need recipes, subscriptions and habit loops."
-  },
-  {
-    slug: "nfticket",
-    name: "NFTicket",
-    image: "/projects/placeholders/first-line-ai.svg",
-    industry: "Events, access control and ticketing",
-    status: "Placeholder product",
-    description:
-      "A digital ticketing and access concept for high-trust events, controlled entry, membership credentials and anti-fraud ticket ownership."
   },
   {
     slug: "smart-nfc-guest-pass",
@@ -328,7 +337,10 @@ export function organizationSchema() {
       "smart building software",
       "government digital platforms",
       "AI concierge systems",
-      "custom SaaS development"
+      "custom SaaS development",
+      "hospitalityOS",
+      "HospitalityOps",
+      "HospitalityTV"
     ],
     brand: "SaaSolutions SL"
   };

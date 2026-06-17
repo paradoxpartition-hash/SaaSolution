@@ -33,10 +33,11 @@ export function HoverSlider({ children, className }: { children: React.ReactNode
 }
 
 export const products: Product[] = [
+  { name: "hospitalityOS", image: "/projects/placeholders/hospitalityos.svg" },
+  { name: "HospitalityOps", image: "/projects/placeholders/hospitalityops.svg" },
+  { name: "HospitalityTV", image: "/projects/placeholders/hospitalitytv.svg" },
   { name: "Mithaq", image: "/projects/mithaq.png" },
-  { name: "PriorityPlanR", image: "/projects/placeholders/priorityplanr.svg" },
   { name: "Viyra", image: "/projects/viyra.png" },
-  { name: "NFTicket", image: "/projects/firstline-ai.png" },
   { name: "Smart NFC Guest Pass", image: "/projects/smart-nfc.png" },
   { name: "Delicious Fitness", image: "/projects/deliciousfitness.png" }
 ];

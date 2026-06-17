@@ -3,10 +3,11 @@
 import { motion } from "framer-motion";
 
 const products = [
+  "hospitalityOS",
+  "HospitalityOps",
+  "HospitalityTV",
   "Mithaq",
-  "PriorityPlanR",
   "Viyra",
-  "First Line AI",
   "Smart NFC Guest Pass",
   "Delicious Fitness"
 ];
