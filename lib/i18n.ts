@@ -125,64 +125,6 @@ export const homeContent = {
   projectTags: Record<string, string>;
 }>;
 
-export const platformsContent = {
-  es: {
-    label: "- Próximas plataformas",
-    title: "Próximas plataformas de SaaSolution SL",
-    intro: "Un ecosistema de tecnología hotelera que se está preparando actualmente para su lanzamiento — parte de la hoja de ruta de tecnología hotelera de SaaSolution SL. Tres productos conectados, disponibles muy pronto.",
-    status: "Disponible muy pronto",
-    cta: "Ver detalles",
-    cards: [
-      { slug: "hospitalityos", name: "hospitalityOS", tagline: "Plataforma de hospitalidad digital", text: "Sitio web hotelero y plataforma de marca multilingüe para alojamientos modernos, gestores de propiedades y empresas del sector hospitalidad." },
-      { slug: "hospitalityops", name: "HospitalityOps", tagline: "Suite de operaciones", text: "App operativa para limpieza, mantenimiento, inspecciones, objetos perdidos, inventario y coordinación de equipos de campo." },
-      { slug: "hospitalitytv", name: "HospitalityTV", tagline: "Experiencia del huésped en Smart TV", text: "Experiencia del huésped en Smart TV para comunicación en la habitación, conserjería digital, información local y acceso a servicios." }
-    ]
-  },
-  en: {
-    label: "- Upcoming platforms",
-    title: "Upcoming SaaSolution SL Platforms",
-    intro: "A dedicated hospitality technology ecosystem currently being prepared for launch — part of the SaaSolution SL hospitality technology roadmap. Three connected products, going online soon.",
-    status: "Going online soon",
-    cta: "View details",
-    cards: [
-      { slug: "hospitalityos", name: "hospitalityOS", tagline: "Digital hospitality platform", text: "A multilingual digital hospitality website and brand platform for modern accommodation providers, property managers and hospitality businesses." },
-      { slug: "hospitalityops", name: "HospitalityOps", tagline: "Operations suite", text: "A mobile-first operations app for housekeeping, maintenance, inspections, lost & found, inventory and field team coordination." },
-      { slug: "hospitalitytv", name: "HospitalityTV", tagline: "Smart TV guest experience", text: "A smart Android TV guest experience for in-room communication, digital concierge features, local information and service access." }
-    ]
-  },
-  nl: {
-    label: "- Aankomende platforms",
-    title: "Aankomende SaaSolution SL platforms",
-    intro: "Een toegewijd hospitality-technologie-ecosysteem dat momenteel wordt voorbereid op de lancering — onderdeel van de hospitality-technologieroadmap van SaaSolution SL. Drie verbonden producten, binnenkort online.",
-    status: "Binnenkort online",
-    cta: "Bekijk details",
-    cards: [
-      { slug: "hospitalityos", name: "hospitalityOS", tagline: "Digitaal hospitality-platform", text: "Een meertalige digitale hospitality-website en merkplatform voor moderne accommodatieaanbieders, vastgoedbeheerders en hospitality-ondernemingen." },
-      { slug: "hospitalityops", name: "HospitalityOps", tagline: "Operationele suite", text: "Een mobile-first operationele app voor housekeeping, onderhoud, inspecties, gevonden voorwerpen, inventaris en coördinatie van veldteams." },
-      { slug: "hospitalitytv", name: "HospitalityTV", tagline: "Smart-TV gastervaring", text: "Een smart Android TV-gastervaring voor communicatie op de kamer, digitale conciërgefuncties, lokale informatie en toegang tot diensten." }
-    ]
-  },
-  de: {
-    label: "- Kommende Plattformen",
-    title: "Kommende SaaSolution SL Plattformen",
-    intro: "Ein dediziertes Hospitality-Technologie-Ökosystem, das derzeit für den Launch vorbereitet wird — Teil der Hospitality-Technologie-Roadmap von SaaSolution SL. Drei vernetzte Produkte, bald online.",
-    status: "Bald online",
-    cta: "Details ansehen",
-    cards: [
-      { slug: "hospitalityos", name: "hospitalityOS", tagline: "Digitale Hospitality-Plattform", text: "Eine mehrsprachige digitale Hospitality-Website und Markenplattform für moderne Beherbergungsbetriebe, Property Manager und Hospitality-Unternehmen." },
-      { slug: "hospitalityops", name: "HospitalityOps", tagline: "Betriebs-Suite", text: "Eine mobile-first Betriebs-App für Housekeeping, Wartung, Inspektionen, Fundbüro, Inventar und die Koordination von Außendienstteams." },
-      { slug: "hospitalitytv", name: "HospitalityTV", tagline: "Smart-TV-Gästeerlebnis", text: "Ein smartes Android-TV-Gästeerlebnis für Zimmerkommunikation, digitale Concierge-Funktionen, lokale Informationen und Servicezugang." }
-    ]
-  }
-} satisfies Record<Locale, {
-  label: string;
-  title: string;
-  intro: string;
-  status: string;
-  cta: string;
-  cards: { slug: string; name: string; tagline: string; text: string }[];
-}>;
-
 export const storyContent = {
   es: {
     methodLabel: "- Método SaaSolutions",
