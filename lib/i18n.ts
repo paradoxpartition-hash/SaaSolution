@@ -55,10 +55,11 @@ export const homeContent = {
     productLayer: "Capa operativa de producto",
     chips: ["IA de flujos", "Automatización", "Paneles"],
     projectTags: {
+      hospitalityOS: "Web hotelera y plataforma de marca multilingüe",
+      HospitalityOps: "Operaciones: limpieza, mantenimiento y equipos de campo",
+      HospitalityTV: "Experiencia del huésped en Smart TV",
       Mithaq: "Prenupcial y testamento islámico digital",
-      PriorityPlanR: "Planificación y agenda inteligente",
       Viyra: "Automatización internacional de flujos",
-      "First Line AI": "Automatización de soporte con agentes IA",
       "Smart NFC Guest Pass": "Acceso digital de invitados",
       "Delicious Fitness": "Comida social y meal prep"
     }
@@ -71,11 +72,11 @@ export const homeContent = {
     productLayer: "Enterprise SaaS, automation and smart systems",
     chips: ["Applied AI", "Digital government", "Smart buildings"],
     projectTags: {
+      hospitalityOS: "Multilingual digital hospitality website and brand platform",
+      HospitalityOps: "Operations: housekeeping, maintenance and field teams",
+      HospitalityTV: "Smart TV guest experience",
       Mithaq: "Digital Islamic Prenup & Will",
-      PriorityPlanR: "Smart Planning & Scheduling",
       Viyra: "International workflow automation",
-      "First Line AI": "AI agent support automation",
-      NFTicket: "Digital ticketing and access control",
       "Smart NFC Guest Pass": "Digital Guest Access",
       "Delicious Fitness": "Social Food & Meal Prep"
     }
@@ -88,10 +89,11 @@ export const homeContent = {
     productLayer: "Operationele productlaag",
     chips: ["Workflow-AI", "Automatisering", "Dashboards"],
     projectTags: {
+      hospitalityOS: "Meertalige digitale hospitality-website en merkplatform",
+      HospitalityOps: "Operations: housekeeping, onderhoud en veldteams",
+      HospitalityTV: "Smart-TV gastervaring",
       Mithaq: "Digitaal islamitisch huwelijkscontract en testament",
-      PriorityPlanR: "Slim plannen en roosteren",
       Viyra: "Internationale workflowautomatisering",
-      "First Line AI": "Supportautomatisering met AI-agenten",
       "Smart NFC Guest Pass": "Digitale gasttoegang",
       "Delicious Fitness": "Social food en maaltijdvoorbereiding"
     }
@@ -104,10 +106,11 @@ export const homeContent = {
     productLayer: "Produktbetriebsebene",
     chips: ["Workflow-KI", "Automatisierung", "Dashboards"],
     projectTags: {
+      hospitalityOS: "Mehrsprachige digitale Hospitality-Website und Markenplattform",
+      HospitalityOps: "Operations: Housekeeping, Wartung und Außendienst",
+      HospitalityTV: "Smart-TV-Gästeerlebnis",
       Mithaq: "Digitaler islamischer Ehevertrag und Testament",
-      PriorityPlanR: "Intelligente Planung und Terminierung",
       Viyra: "Internationale Workflow-Automatisierung",
-      "First Line AI": "Supportautomatisierung mit KI-Agenten",
       "Smart NFC Guest Pass": "Digitaler Gästezugang",
       "Delicious Fitness": "Social Food und Meal Prep"
     }
@@ -120,6 +123,64 @@ export const homeContent = {
   productLayer: string;
   chips: string[];
   projectTags: Record<string, string>;
+}>;
+
+export const platformsContent = {
+  es: {
+    label: "- Próximas plataformas",
+    title: "Próximas plataformas de SaaSolution SL",
+    intro: "Un ecosistema de tecnología hotelera que se está preparando actualmente para su lanzamiento — parte de la hoja de ruta de tecnología hotelera de SaaSolution SL. Tres productos conectados, disponibles muy pronto.",
+    status: "Disponible muy pronto",
+    cta: "Ver detalles",
+    cards: [
+      { slug: "hospitalityos", name: "hospitalityOS", tagline: "Plataforma de hospitalidad digital", text: "Sitio web hotelero y plataforma de marca multilingüe para alojamientos modernos, gestores de propiedades y empresas del sector hospitalidad." },
+      { slug: "hospitalityops", name: "HospitalityOps", tagline: "Suite de operaciones", text: "App operativa para limpieza, mantenimiento, inspecciones, objetos perdidos, inventario y coordinación de equipos de campo." },
+      { slug: "hospitalitytv", name: "HospitalityTV", tagline: "Experiencia del huésped en Smart TV", text: "Experiencia del huésped en Smart TV para comunicación en la habitación, conserjería digital, información local y acceso a servicios." }
+    ]
+  },
+  en: {
+    label: "- Upcoming platforms",
+    title: "Upcoming SaaSolution SL Platforms",
+    intro: "A dedicated hospitality technology ecosystem currently being prepared for launch — part of the SaaSolution SL hospitality technology roadmap. Three connected products, going online soon.",
+    status: "Going online soon",
+    cta: "View details",
+    cards: [
+      { slug: "hospitalityos", name: "hospitalityOS", tagline: "Digital hospitality platform", text: "A multilingual digital hospitality website and brand platform for modern accommodation providers, property managers and hospitality businesses." },
+      { slug: "hospitalityops", name: "HospitalityOps", tagline: "Operations suite", text: "A mobile-first operations app for housekeeping, maintenance, inspections, lost & found, inventory and field team coordination." },
+      { slug: "hospitalitytv", name: "HospitalityTV", tagline: "Smart TV guest experience", text: "A smart Android TV guest experience for in-room communication, digital concierge features, local information and service access." }
+    ]
+  },
+  nl: {
+    label: "- Aankomende platforms",
+    title: "Aankomende SaaSolution SL platforms",
+    intro: "Een toegewijd hospitality-technologie-ecosysteem dat momenteel wordt voorbereid op de lancering — onderdeel van de hospitality-technologieroadmap van SaaSolution SL. Drie verbonden producten, binnenkort online.",
+    status: "Binnenkort online",
+    cta: "Bekijk details",
+    cards: [
+      { slug: "hospitalityos", name: "hospitalityOS", tagline: "Digitaal hospitality-platform", text: "Een meertalige digitale hospitality-website en merkplatform voor moderne accommodatieaanbieders, vastgoedbeheerders en hospitality-ondernemingen." },
+      { slug: "hospitalityops", name: "HospitalityOps", tagline: "Operationele suite", text: "Een mobile-first operationele app voor housekeeping, onderhoud, inspecties, gevonden voorwerpen, inventaris en coördinatie van veldteams." },
+      { slug: "hospitalitytv", name: "HospitalityTV", tagline: "Smart-TV gastervaring", text: "Een smart Android TV-gastervaring voor communicatie op de kamer, digitale conciërgefuncties, lokale informatie en toegang tot diensten." }
+    ]
+  },
+  de: {
+    label: "- Kommende Plattformen",
+    title: "Kommende SaaSolution SL Plattformen",
+    intro: "Ein dediziertes Hospitality-Technologie-Ökosystem, das derzeit für den Launch vorbereitet wird — Teil der Hospitality-Technologie-Roadmap von SaaSolution SL. Drei vernetzte Produkte, bald online.",
+    status: "Bald online",
+    cta: "Details ansehen",
+    cards: [
+      { slug: "hospitalityos", name: "hospitalityOS", tagline: "Digitale Hospitality-Plattform", text: "Eine mehrsprachige digitale Hospitality-Website und Markenplattform für moderne Beherbergungsbetriebe, Property Manager und Hospitality-Unternehmen." },
+      { slug: "hospitalityops", name: "HospitalityOps", tagline: "Betriebs-Suite", text: "Eine mobile-first Betriebs-App für Housekeeping, Wartung, Inspektionen, Fundbüro, Inventar und die Koordination von Außendienstteams." },
+      { slug: "hospitalitytv", name: "HospitalityTV", tagline: "Smart-TV-Gästeerlebnis", text: "Ein smartes Android-TV-Gästeerlebnis für Zimmerkommunikation, digitale Concierge-Funktionen, lokale Informationen und Servicezugang." }
+    ]
+  }
+} satisfies Record<Locale, {
+  label: string;
+  title: string;
+  intro: string;
+  status: string;
+  cta: string;
+  cards: { slug: string; name: string; tagline: string; text: string }[];
 }>;
 
 export const storyContent = {
@@ -142,7 +203,7 @@ export const storyContent = {
       ["Sobre SaaSolutions", "Somos SaaSolutions: un estudio de ingenieros y diseñadores que lanza productos cinematográficos para empresas ambiciosas. Desde comercio hasta agentes IA y hardware conectado, construimos lo que tus clientes no dejan de comentar."],
       ["Plataformas AI-first", "Creamos software que combina automatización, arquitectura cloud moderna y flujos de trabajo impulsados por IA."],
       ["Cómo convertimos un brief\nen un lanzamiento destacado.", "El Método SaaSolutions"],
-      ["Seis productos.\nUna obsesión por el oficio.", "Cada línea de código, cada pixel y cada interacción están diseñados para que tus clientes sientan algo. Esto es lo que estamos lanzando ahora."],
+      ["Siete productos.\nUna obsesión por el oficio.", "Cada línea de código, cada pixel y cada interacción están diseñados para que tus clientes sientan algo. Esto es lo que estamos lanzando ahora, incluidas nuestras próximas plataformas hoteleras hospitalityOS, HospitalityOps y HospitalityTV."],
       ["Colabora con nosotros", "Estamos abiertos a alianzas, pilotos y despliegues internacionales con empresas, gobiernos, operadores y partners tecnológicos."]
     ],
     methodSteps: [
@@ -171,7 +232,7 @@ export const storyContent = {
       ["About SaaSolutions", "SaaSolutions SL is an AI-first software and automation company headquartered in Ceuta, Spain. We build premium SaaS platforms, AI workflows and operational systems for companies, governments and international operators."],
       ["AI-First Platforms", "We create software that combines applied AI, secure cloud architecture, automation and elegant product design for Spain, Africa, South America, UAE/GCC and Southeast Asia."],
       ["How we turn a brief\ninto a deployed platform.", "The SaaSolutions Method"],
-      ["Six products.\nOne obsession with craft.", "PriorityPlanR, Mithaq, Viyra, Delicious Fitness, NFTicket and Smart NFC Guest Pass are product tracks shaped around hospitality, buildings, legal workflows, operations, events and commerce."],
+      ["Seven products.\nOne obsession with craft.", "hospitalityOS, HospitalityOps, HospitalityTV, Mithaq, Viyra, Delicious Fitness and Smart NFC Guest Pass are product tracks shaped around hospitality, guest experience, operations, real estate, legal workflows and commerce. The hospitality platforms are going online soon."],
       ["Partner With Us", "We are open to partnerships, pilots and enterprise deployments with hospitality groups, real estate operators, public-sector teams, GCC partners, African markets, South American companies and Southeast Asian delivery teams."]
     ],
     methodSteps: [
@@ -200,7 +261,7 @@ export const storyContent = {
       ["Over SaaSolutions", "Wij zijn SaaSolutions: een studio van engineers en designers die filmische producten bouwen voor ambitieuze bedrijven. Van commerce tot AI-agenten en connected hardware: wij bouwen wat klanten blijven bespreken."],
       ["AI-first platforms", "We maken software die automatisering, moderne cloudarchitectuur en AI-gedreven workflows combineert."],
       ["Hoe we een briefing\nomzetten in doorbraak.", "De SaaSolutions methode"],
-      ["Zes producten.\nEen obsessie voor vakwerk.", "Elke regel code, elke pixel en elke interactie is gemaakt om klanten iets te laten voelen. Dit bouwen we nu."],
+      ["Zeven producten.\nEen obsessie voor vakwerk.", "Elke regel code, elke pixel en elke interactie is gemaakt om klanten iets te laten voelen. Dit bouwen we nu, inclusief onze aankomende hospitality-platforms hospitalityOS, HospitalityOps en HospitalityTV."],
       ["Werk met ons samen", "We staan open voor partnerships, pilots en internationale uitrol met bedrijven, overheden, operators en technologiepartners."]
     ],
     methodSteps: [
@@ -229,7 +290,7 @@ export const storyContent = {
       ["Über SaaSolutions", "Wir sind SaaSolutions: ein Studio aus Engineers und Designern, das cineastische Produkte für ambitionierte Unternehmen liefert. Von Commerce über KI-Agenten bis zu vernetzter Hardware bauen wir Dinge, über die Kunden sprechen."],
       ["AI-first Plattformen", "Wir entwickeln Software, die Automatisierung, moderne Cloud-Architektur und KI-gestützte Workflows verbindet."],
       ["Wie wir ein Briefing\nin einen Durchbruch verwandeln.", "Die SaaSolutions Methode"],
-      ["Sechs Produkte.\nEine Obsession für Handwerk.", "Jede Codezeile, jeder Pixel und jede Interaktion ist darauf ausgelegt, bei Kunden Wirkung zu erzeugen. Das liefern wir gerade."],
+      ["Sieben Produkte.\nEine Obsession für Handwerk.", "Jede Codezeile, jeder Pixel und jede Interaktion ist darauf ausgelegt, bei Kunden Wirkung zu erzeugen. Das liefern wir gerade, darunter unsere kommenden Hospitality-Plattformen hospitalityOS, HospitalityOps und HospitalityTV."],
       ["Mit uns arbeiten", "Wir sind offen für Partnerschaften, Piloten und internationale Deployments mit Unternehmen, Regierungen, Betreibern und Technologiepartnern."]
     ],
     methodSteps: [
@@ -248,7 +309,7 @@ export const footerContent = {
     aria: "Enlaces de pie de página",
     groups: [
       ["Empresa", ["Sobre nosotros", "Misión y visión", "Carreras / Vacantes", "Partners", "Contacto"]],
-      ["Productos", ["PriorityPlanR", "Mithaq", "First Line AI", "Delicious Fitness", "Smart NFC"]],
+      ["Productos", ["hospitalityOS", "HospitalityOps", "HospitalityTV", "Mithaq", "Smart NFC Guest Pass"]],
       ["Recursos", ["Blog", "Centro de ayuda", "Documentación", "API", "Soporte"]],
       ["Legal", ["Privacidad", "Términos y condiciones", "Cookies", "Acuerdo de procesamiento de datos", "Seguridad"]],
       ["Social", ["LinkedIn", "Instagram", "YouTube", "X"]]
@@ -260,7 +321,7 @@ export const footerContent = {
     aria: "Footer links",
     groups: [
       ["Company", ["About", "Mission & Vision", "Careers / Vacancies", "Partners", "Contact"]],
-      ["Products", ["PriorityPlanR", "Mithaq", "Viyra", "Delicious Fitness", "NFTicket"]],
+      ["Products", ["hospitalityOS", "HospitalityOps", "HospitalityTV", "Mithaq", "Smart NFC Guest Pass"]],
       ["Resources", ["Blog", "Help Center", "Documentation", "API", "Support"]],
       ["Legal", ["Privacy Policy", "Terms & Conditions", "Cookie Policy", "Data Processing Agreement", "Security"]],
       ["Social", ["LinkedIn", "Instagram", "YouTube", "X"]]
@@ -272,7 +333,7 @@ export const footerContent = {
     aria: "Footerlinks",
     groups: [
       ["Bedrijf", ["Over ons", "Missie en visie", "Carrières / Vacatures", "Partners", "Contact"]],
-      ["Producten", ["PriorityPlanR", "Mithaq", "First Line AI", "Delicious Fitness", "Smart NFC"]],
+      ["Producten", ["hospitalityOS", "HospitalityOps", "HospitalityTV", "Mithaq", "Smart NFC Guest Pass"]],
       ["Resources", ["Blog", "Helpcentrum", "Documentatie", "API", "Support"]],
       ["Juridisch", ["Privacybeleid", "Voorwaarden", "Cookiebeleid", "Verwerkersovereenkomst", "Beveiliging"]],
       ["Sociaal", ["LinkedIn", "Instagram", "YouTube", "X"]]
@@ -284,7 +345,7 @@ export const footerContent = {
     aria: "Footer-Links",
     groups: [
       ["Unternehmen", ["Über uns", "Mission und Vision", "Karriere / Stellen", "Partner", "Kontakt"]],
-      ["Produkte", ["PriorityPlanR", "Mithaq", "First Line AI", "Delicious Fitness", "Smart NFC"]],
+      ["Produkte", ["hospitalityOS", "HospitalityOps", "HospitalityTV", "Mithaq", "Smart NFC Guest Pass"]],
       ["Ressourcen", ["Blog", "Hilfezentrum", "Dokumentation", "API", "Support"]],
       ["Rechtliches", ["Datenschutz", "AGB", "Cookie-Richtlinie", "Auftragsverarbeitung", "Sicherheit"]],
       ["Social", ["LinkedIn", "Instagram", "YouTube", "X"]]

@@ -5,7 +5,7 @@ type FooterLink = { label: string; href: string };
 
 const hrefGroups = [
   ["/about", "/mission-vision", "/careers", "/partners", "/contact"],
-  ["/products/priorityplanr", "/products/mithaq", "/products/first-line-ai", "/products/delicious-fitness", "/products/smart-nfc"],
+  ["/products/hospitalityos", "/products/hospitalityops", "/products/hospitalitytv", "/products/mithaq", "/products/smart-nfc-guest-pass"],
   ["/blog", "/help-center", "/docs", "/api", "https://saasupport.com"],
   ["/privacy", "/terms", "/cookies", "/dpa", "/security"],
   ["/social/linkedin", "/social/instagram", "/social/youtube", "/social/x"]
